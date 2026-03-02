@@ -456,19 +456,44 @@ if(navigator.share && navigator.canShare && navigator.canShare({files:[new File(
     reader.onloadend = function(){
       var base64 = reader.result.split(",")[1];
       Capacitor.Plugins.Filesystem.writeFile({
-        path: "figurinhas-copa2026.png",
+        path: "copa2026.png",
         data: base64,
-        directory: "EXTERNAL_STORAGE",
+        directory: "CACHE",
         recursive: true
-      }).then(function(){
-        toast("Imagem salva na galeria!");
-      }).catch(function(){
-        toast("Erro ao salvar imagem.");
+      }).then(function(res){
+        Capacitor.Plugins.Media.getAlbums().then(function(result){
+          var album = result.albums.find(function(a){ return a.name === "Copa 2026"; });
+          function salvar(id){
+            Capacitor.Plugins.Media.savePhoto({
+              path: res.uri,
+              albumIdentifier: id
+            }).then(function(){
+              toast("Imagem salva na galeria!");
+            }).catch(function(e){
+              toast("Erro: " + e.message);
+            });
+          }
+          if(album){
+            salvar(album.identifier);
+          } else {
+            Capacitor.Plugins.Media.createAlbum({name:"Copa 2026"}).then(function(){
+              Capacitor.Plugins.Media.getAlbums().then(function(r2){
+                var a2 = r2.albums.find(function(a){ return a.name === "Copa 2026"; });
+                if(a2) salvar(a2.identifier);
+              });
+            }).catch(function(){
+              toast("Erro ao criar álbum.");
+            });
+          }
+        });
+      }).catch(function(e){
+        toast("Erro ao gerar imagem: " + e.message);
       });
     };
     reader.readAsDataURL(blob);
   });
 }
+
 }
 document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});
 document.getElementById("sbx").addEventListener("input",function(){search(this.value);});

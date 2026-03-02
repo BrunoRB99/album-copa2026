@@ -451,11 +451,23 @@ if(navigator.share && navigator.canShare && navigator.canShare({files:[new File(
     navigator.share({files:[file],title:"Figurinhas Copa 2026"});
   });
 }else{
-  var link=document.createElement("a");
-  link.download="figurinhas-copa2026.png";
-  link.href=dataUrl;
-  link.click();
-  toast("Imagem salva!");
+  canvas.toBlob(function(blob){
+    var reader = new FileReader();
+    reader.onloadend = function(){
+      var base64 = reader.result.split(",")[1];
+      Capacitor.Plugins.Filesystem.writeFile({
+        path: "figurinhas-copa2026.png",
+        data: base64,
+        directory: "EXTERNAL_STORAGE",
+        recursive: true
+      }).then(function(){
+        toast("Imagem salva na galeria!");
+      }).catch(function(){
+        toast("Erro ao salvar imagem.");
+      });
+    };
+    reader.readAsDataURL(blob);
+  });
 }
 }
 document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});

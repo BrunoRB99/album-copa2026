@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<style>
+body{margin:0;background:#040c18;}
+#LS{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#040c18,#07101f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
+.ls-ball{font-size:64px;animation:bounce .7s ease-in-out infinite alternate;}
+.ls-title{font-size:34px;letter-spacing:5px;color:#f0b429;text-align:center;line-height:1.2;}
+.ls-bar-wrap{width:200px;height:4px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden;}
+.ls-bar{height:100%;width:0%;background:#f0b429;border-radius:99px;transition:width .3s ease;}
+.ls-lbl{font-size:10px;color:rgba(255,255,255,.4);letter-spacing:2.5px;}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-14px)}}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÁLBUM Copa 2026</title>
+<style>
+html{background:#07101f;}
+:root{--bg:#07101f;--card:#0e1c30;--card2:#132035;--gold:#f0b429;--gold2:#e09a10;--green:#1db954;--light:#dce8f5;--muted:#6b7f9a;--border:#182840;--border2:#1e3050;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);font-family: system-ui,-apple-system,'Segoe UI',sans-serif;;color:var(--light);min-height:100vh;}
+#LS{position:fixed;inset:0;z-index:9999;background:linear-gradient(180deg,#040c18,#07101f);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .35s;}
+#LS.hide{opacity:0;pointer-events:none;}
+.ls-ball{font-size:64px;animation:bounce .7s ease-in-out infinite alternate;}
+@keyframes bounce{from{transform:translateY(0)}to{transform:translateY(-14px)}}
+.ls-title{font-family: Impact,'Arial Narrow',sans-serif;;font-size:34px;letter-spacing:5px;color:var(--gold);text-align:center;line-height:1.2;}
+.ls-bar-wrap{width:200px;height:4px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
+.ls-bar{height:100%;width:0%;background:var(--gold);border-radius:99px;transition:width .3s ease;}
+.ls-lbl{font-size:10px;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;}
+header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,#040c18,#0a1828);border-bottom:2px solid rgba(240,180,41,.25);box-shadow:0 4px 40px rgba(0,0,0,.7);overflow:hidden;}
+.hbg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(240,180,41,.12) 0%,transparent 70%),repeating-linear-gradient(90deg,rgba(255,255,255,.015) 0px,rgba(255,255,255,.015) 1px,transparent 1px,transparent 60px);}
+.hinner{position:relative;padding:18px 16px 14px;text-align:center;}
+.copa-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(240,180,41,.15),rgba(240,180,41,.05));border:1px solid rgba(240,180,41,.3);border-radius:99px;padding:5px 16px;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;}
+.copa-badge::before{content:"★"}.copa-badge::after{content:"★"}
+h1{font-family: Impact,'Arial Narrow',sans-serif;;font-size:clamp(28px,6vw,52px);letter-spacing:4px;line-height:1;color:#fff;text-shadow:0 0 40px rgba(240,180,41,.35);margin-bottom:4px;}
+h1 em{color:var(--gold);font-style:normal;}
+.hosts{display:flex;align-items:center;justify-content:center;gap:16px;margin:10px 0 14px;}
+.host-pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:600;color:rgba(255,255,255,.7);}
+.host-pill span{font-size:16px;}
+.prog-outer{background:rgba(255,255,255,.05);border:1px solid var(--border2);border-radius:14px;padding:14px 20px;max-width:480px;margin:0 auto;}
+.prog-nums{display:flex;justify-content:space-between;margin-bottom:10px;}
+.pn{text-align:center;}
+.pnum{font-family: Impact,'Arial Narrow',sans-serif;;font-size:22px;color:var(--gold);line-height:1;}
+.plbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:2px;}
+.pbar-wrap{height:8px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;}
+.pbar-fill{height:100%;background:linear-gradient(90deg,#1a8a4a,var(--green));border-radius:99px;transition:width .5s ease;width:0%;box-shadow:0 0 10px rgba(29,185,84,.4);}
+.controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;padding:12px 16px 6px;max-width:960px;margin:0 auto;}
+.sbox{flex:1;min-width:160px;max-width:280px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;color:var(--light);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;}
+.sbox:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,180,41,.1);}
+.sbox::placeholder{color:var(--muted);}
+.search-sticker-row{display:flex;gap:8px;justify-content:center;align-items:center;padding:0 16px 12px;max-width:960px;margin:0 auto;}
+.sbox-code{flex:1;min-width:180px;max-width:360px;background:var(--card2);border:1px solid rgba(240,180,41,.3);border-radius:10px;padding:10px 14px;color:var(--light);font-size:13px;font-family:inherit;outline:none;transition:border-color .2s;}
+.sbox-code:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(240,180,41,.12);}
+.sbox-code::placeholder{color:rgba(240,180,41,.5);}
+.code-hint{font-size:11px;color:var(--muted);white-space:nowrap;}
+.btn-cc{background:rgba(240,180,41,.1);border:1px solid rgba(240,180,41,.3);border-radius:8px;padding:9px 12px;color:var(--gold);font-size:12px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.btn-cc:hover{background:rgba(240,180,41,.2);}
+.cbtn{background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:10px 14px;color:var(--muted);font-size:12px;font-weight:600;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.cbtn:hover{border-color:rgba(240,180,41,.5);color:var(--gold);}
+.cbtn.act{border-color:var(--gold);color:var(--gold);background:rgba(240,180,41,.1);}
+.cbtn-red{background:transparent;border:1px solid rgba(192,57,43,.4);color:#e74c3c;}
+.cbtn-red:hover{background:rgba(231,76,60,.08);border-color:#e74c3c;}
+.cbtn-export{background:linear-gradient(135deg,rgba(240,180,41,.2),rgba(240,180,41,.08));border:1px solid rgba(240,180,41,.5);color:var(--gold);font-weight:700;}
+.cbtn-export:hover{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#000;}
+.found-bar{display:none;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.25);border-radius:10px;padding:10px 16px;margin:0 auto 10px;font-size:12px;color:var(--gold);text-align:center;max-width:928px;}
+.found-bar.show{display:block;}
+main{max-width:1100px;margin:0 auto;padding:16px;}
+.glbl{display:flex;align-items:center;gap:14px;margin:28px 0 12px;padding:12px 18px;border-radius:10px;}
+.gbadge{font-family: Impact,'Arial Narrow',sans-serif;;font-size:28px;line-height:1;width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ginfo{flex:1;}
+.gtitle{font-family: Impact,'Arial Narrow',sans-serif;;font-size:18px;letter-spacing:3px;color:#fff;}
+.gsub{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.gstat{text-align:right;}
+.gspct{font-family: Impact,'Arial Narrow',sans-serif;;font-size:16px;}
+.gsplbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.tsec{background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:box-shadow .2s;}
+.tsec:hover{box-shadow:0 4px 20px rgba(0,0,0,.3);}
+.tsec.tbd{opacity:.6;}
+.thead{display:flex;align-items:center;justify-content:space-between;padding:13px 16px 13px 19px;cursor:pointer;user-select:none;}
+.thead:hover{background:rgba(255,255,255,.03);}
+.thl{display:flex;align-items:center;gap:13px;}
+.tflag-box{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.tname{font-weight:800;font-size:14px;color:#fff;}
+.tgrplbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.tbd-tag{font-size:9px;background:rgba(255,200,0,.12);color:rgba(255,200,0,.7);border:1px solid rgba(255,200,0,.2);border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:700;letter-spacing:1px;}
+.thr{display:flex;align-items:center;gap:12px;}
+.tprog{text-align:right;}
+.tcnt{font-family: Impact,'Arial Narrow',sans-serif;;font-size:15px;color:var(--gold);line-height:1;}
+.tcnt.done{color:var(--green);}
+.tmbar{width:72px;height:3px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:4px;}
+.tmfill{height:100%;border-radius:99px;transition:width .4s;}
+.chev{color:var(--muted);font-size:12px;transition:transform .3s;}
+.tsec.open .chev{transform:rotate(180deg);}
+.sgrid{display:none;padding:14px 16px 16px;border-top:1px solid var(--border);grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:7px;}
+.tsec.open .sgrid{display:grid;}
+.cbanner{background:linear-gradient(90deg,rgba(29,185,84,.2),rgba(29,185,84,.05));border-left:3px solid var(--green);padding:9px 16px;font-size:12px;font-weight:700;color:var(--green);display:none;margin:0 16px 12px;border-radius:0 8px 8px 0;}
+.cbanner.show{display:block;}
+.stk{aspect-ratio:3/4;border-radius:9px;background:linear-gradient(145deg,#1a2a3d,#0f1c2e);border:1.5px solid rgba(255,255,255,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.stk::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%);}
+.stk:hover{transform:translateY(-3px) scale(1.05);border-color:rgba(240,180,41,.5);box-shadow:0 8px 20px rgba(0,0,0,.4);}
+.stk.got{background:linear-gradient(145deg,#0d3322,#1a5c38);border-color:rgba(29,185,84,.5);box-shadow:0 2px 14px rgba(29,185,84,.2);}
+.stk.got:hover{border-color:var(--green);}
+.stk.found{border-color:var(--gold)!important;box-shadow:0 0 0 2px var(--gold),0 0 20px rgba(240,180,41,.5)!important;animation:pgold 1.5s ease-in-out 3;}
+@keyframes pgold{0%,100%{box-shadow:0 0 0 2px var(--gold),0 0 20px rgba(240,180,41,.4);}50%{box-shadow:0 0 0 4px var(--gold),0 0 40px rgba(240,180,41,.8);}}
+.snum{font-family: Impact,'Arial Narrow',sans-serif;;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.5px;margin-bottom:3px;text-align:center;width:100%;}
+.stk.got .snum{color:rgba(255,255,255,.85);}
+.stk.found .snum{color:var(--gold);}
+.sico{font-size:17px;line-height:1;}
+.slbl{font-size:7.5px;text-align:center;color:rgba(255,255,255,.3);padding:0 3px;line-height:1.3;margin-top:3px;}
+.stk.got .slbl{color:rgba(255,255,255,.7);}
+.schk{position:absolute;top:4px;right:5px;font-size:9px;color:var(--green);opacity:0;transition:opacity .2s;}
+.stk.got .schk{opacity:1;}
+.tbd-msg{background:rgba(255,255,255,.02);border:1px dashed rgba(255,255,255,.07);border-radius:8px;padding:14px 16px;font-size:11px;color:var(--muted);text-align:center;line-height:1.6;}
+.nores{text-align:center;padding:50px 20px;color:var(--muted);font-size:14px;}
+.toast{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#0d3322,#1a5c38);border:1px solid rgba(29,185,84,.4);color:#fff;border-radius:12px;padding:13px 20px;font-size:13px;font-weight:600;box-shadow:0 8px 30px rgba(0,0,0,.5);transform:translateX(160px);opacity:0;transition:all .35s;z-index:999;max-width:260px;}
+.toast.show{transform:translateX(0);opacity:1;}
+.toast.bad{background:linear-gradient(135deg,#3a0d0d,#7a1a1a);border-color:rgba(192,57,43,.4);}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(4px);z-index:200;display:none;align-items:center;justify-content:center;padding:16px;}
+.overlay.show{display:flex;}
+.modal{background:var(--card);border:1px solid var(--border2);border-radius:18px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.8);}
+.mhead{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;}
+.mhead-ico{width:40px;height:40px;border-radius:10px;background:rgba(240,180,41,.12);border:1px solid rgba(240,180,41,.25);display:flex;align-items:center;justify-content:center;font-size:20px;}
+.mtitle{font-family: Impact,'Arial Narrow',sans-serif;;font-size:22px;letter-spacing:2px;color:var(--gold);flex:1;}
+.mclose{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:8px;color:var(--muted);font-size:18px;cursor:pointer;width:34px;height:34px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.mclose:hover{color:#fff;}
+.mbody{padding:20px 24px;}
+.msub{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
+.estats{display:flex;gap:10px;margin-bottom:22px;}
+.estat{flex:1;border-radius:12px;padding:14px 10px;text-align:center;background:rgba(255,255,255,.04);border:1px solid var(--border2);}
+.enum{font-family: Impact,'Arial Narrow',sans-serif;;font-size:32px;color:var(--gold);line-height:1;}
+.elbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px;}
+.eopts{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.ebtn{border-radius:12px;padding:15px 18px;border:1px solid var(--border);cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;display:flex;align-items:center;gap:14px;transition:all .2s;}
+.ebtn-txt{background:rgba(240,180,41,.08);border-color:rgba(240,180,41,.35);color:var(--gold);}
+.ebtn-txt:hover{background:rgba(240,180,41,.15);}
+.ebtn-share{background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.35);color:#25d366;}
+.ebtn-share:hover{background:rgba(37,211,102,.15);}
+.ebtn-img{background:rgba(52,152,219,.08);border-color:rgba(52,152,219,.35);color:#5dade2;}
+.ebtn-img:hover{background:rgba(52,152,219,.15);}
+.eico{font-size:24px;flex-shrink:0;}
+.einfo{text-align:left;}
+.einfo small{display:block;font-size:11px;font-weight:400;opacity:.6;margin-top:2px;}
+.eprev{background:rgba(0,0,0,.3);border-radius:10px;padding:14px;max-height:200px;overflow-y:auto;border:1px solid var(--border);display:none;}
+.eprev.show{display:block;}
+.eprevtxt{font-size:11px;line-height:1.9;color:var(--light);font-family:monospace;white-space:pre-wrap;}
+.ecopy{font-size:11px;color:var(--green);margin-top:8px;display:none;}
+.ecopy.show{display:block;}
+#ecanvas{display:none;}
+@media(max-width:480px){.sgrid{grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:5px;}h1{font-size:28px;}}
+</style>
+</head>
+<body>
+
+<div id="LS">
+  <div class="ls-ball">&#9917;</div>
+  <div class="ls-title">ÁLBUM COPA<br>2026</div>
+  <div class="ls-bar-wrap"><div class="ls-bar" id="LSbar"></div></div>
+  <div class="ls-lbl">Carregando...</div>
+</div>
+
+<header>
+  <div class="hbg"></div>
+  <div class="hinner">
+    <div class="copa-badge">FIFA WORLD CUP 2026</div>
+    <h1>ÁLBUM DE <em>FIGURINHAS</em></h1>
+    <div class="hosts">
+      <div class="host-pill"><span>&#127482;&#127480;</span> USA</div>
+      <div class="host-pill"><span>&#127464;&#127462;</span> CANADÁ</div>
+      <div class="host-pill"><span>&#127474;&#127485;</span> MEXICO</div>
+    </div>
+    <div class="prog-outer">
+      <div class="prog-nums">
+        <div class="pn"><div class="pnum" id="pC">0</div><div class="plbl">Coletadas</div></div>
+        <div class="pn"><div class="pnum" id="pP">0%</div><div class="plbl">Completo</div></div>
+        <div class="pn"><div class="pnum" id="pM">960</div><div class="plbl">Faltando</div></div>
+      </div>
+      <div class="pbar-wrap"><div class="pbar-fill" id="pbar"></div></div>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <input class="sbox" id="sbx" type="text" placeholder="&#128269; Buscar seleção, código ou jogador">
+  <button class="cbtn act" id="fall"      onclick="setF('all')">Todas</button>
+  <button class="cbtn"     id="fmissing"  onclick="setF('missing')">Faltando</button>
+  <button class="cbtn"     id="fcomplete" onclick="setF('complete')">Completas</button>
+  <button class="cbtn"     onclick="togAll()">&#8597; Expandir</button>
+  <button class="cbtn cbtn-export" onclick="openExp()">&#128228; Exportar Faltantes</button>
+  <button class="cbtn cbtn-red"    onclick="resetAll()">&#128465; Resetar</button>
+</div>
+<div class="found-bar" id="foundBar"></div>
+
+<main id="MC"></main>
+<div class="toast" id="toast"></div>
+
+<div class="overlay" id="expModal">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mhead-ico">&#128228;</div>
+      <div class="mtitle">Exportar Faltantes</div>
+      <button class="mclose" onclick="closeExp()">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <div class="msub">Compartilhe sua lista de figurinhas faltantes.</div>
+      <div class="estats">
+        <div class="estat"><div class="enum" id="eMiss">0</div><div class="elbl">Faltando</div></div>
+        <div class="estat"><div class="enum" id="eGot">0</div><div class="elbl">Coletadas</div></div>
+        <div class="estat"><div class="enum" id="eTeams">0</div><div class="elbl">Incompletos</div></div>
+      </div>
+      <div class="eopts">
+        <button class="ebtn ebtn-txt"   onclick="expText()"><span class="eico">&#128203;</span><div class="einfo">Copiar como Texto<small>WhatsApp, Telegram ou notas</small></div></button>
+        <button class="ebtn ebtn-share" onclick="shareText()"><span class="eico">&#128242;</span><div class="einfo">Compartilhar via WhatsApp<small>Abre o seletor de apps</small></div></button>
+        <button class="ebtn ebtn-img"   onclick="expImage()"><span class="eico">&#128444;</span><div class="einfo">Salvar como Imagem PNG<small>Gera imagem para grupos</small></div></button>
+      </div>
+      <div class="eprev" id="eprev"><div class="eprevtxt" id="eprevtxt"></div><div class="ecopy" id="ecopy">&#10003; Copiado!</div></div>
+    </div>
+  </div>
+</div>
+<canvas id="ecanvas"></canvas>
+
+<script>
+var teams=[
+  {id:"estadios", name:"Estádios", flag: "EST", emoji: "🏟️", group: "OUTRAS", labels:["MetLife Stadium", "AT&T Stadium", "SoFi Stadium", "Mercedes-Benz Stadium", "Hard Rock Stadium", "Lumen Field", "Gillette Stadium", "Lincoln Financial Stadium", "Levi's Stadium", "NGR Stadium", "Arrowhead Stadium"], count:11},
+  {id:"especiais", name:"Especiais", flag:"SPE", emoji: "⚽", group: "OUTRAS", labels:["Panini", "FIFA", "Mascote 1", "Mascote 2", "Taça 1", "Taça 2", "Logo 1", "Logo 2", "Bola"], count:9},
+  {id:"southkorea",  name:"Coreia do Sul",      flag:"KOR",emoji:"&#127472;&#127479;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"mexico",      name:"México",             flag:"MEX",emoji:"&#127474;&#127485;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"southafrica", name:"África do Sul",      flag:"RSA",emoji:"&#127487;&#127462;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"europaD",     name:"Europa D",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO A",tbd:true},
+  {id:"canada",      name:"Canadá",             flag:"CAN",emoji:"&#127464;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"qatar",       name:"Catar",              flag:"QAT",emoji:"&#127478;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"switzerland", name:"Suíça",              flag:"SUI",emoji:"&#127464;&#127469;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"europaA",     name:"Europa A",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO B",tbd:true},
+  {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;",         group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"haiti",       name:"Haiti",              flag:"HAI",emoji:"&#127469;&#127481;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"morocco",     name:"Marrocos",           flag:"MAR",emoji:"&#127474;&#127462;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"australia",   name:"Austrália",          flag:"AUS",emoji:"&#127462;&#127482;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"usa",         name:"Estados Unidos",     flag:"USA",emoji:"&#127482;&#127480;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"europaC",     name:"Europa C",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO D",tbd:true},
+  {id:"paraguay",    name:"Paraguai",           flag:"PAR",emoji:"&#127477;&#127486;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"germany",     name:"Alemanha",           flag:"GER",emoji:"&#127465;&#127466;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"ivorycoast",  name:"Costa do Marfim",    flag:"CIV",emoji:"&#127464;&#127470;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"curacao",     name:"Curaçao",            flag:"CUR",emoji:"&#127464;&#127484;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"ecuador",     name:"Equador",            flag:"ECU",emoji:"&#127466;&#127464;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"netherlands", name:"Holanda",            flag:"NED",emoji:"&#127475;&#127473;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"japan",       name:"Japão",              flag:"JPN",emoji:"&#127471;&#127477;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"tunisia",     name:"Tunísia",            flag:"TUN",emoji:"&#127481;&#127475;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"europaB",     name:"Europa B",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO F",tbd:true},
+  {id:"belgium",     name:"Bélgica",            flag:"BEL",emoji:"&#127463;&#127466;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"egypt",       name:"Egito",              flag:"EGY",emoji:"&#127466;&#127468;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"iran",        name:"Irã",                flag:"IRN",emoji:"&#127470;&#127479;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"newzealand",  name:"Nova Zelândia",      flag:"NZL",emoji:"&#127475;&#127487;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"saudiarabia", name:"Arábia Saudita",     flag:"KSA",emoji:"&#127480;&#127462;",group:"GRUPO H", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"capeverde",   name:"Cabo Verde",         flag:"CPV",emoji:"&#127464;&#127483;",group:"GRUPO H", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"spain",       name:"Espanha",            flag:"ESP",emoji:"&#127466;&#127480;",group:"GRUPO H", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"uruguay",     name:"Uruguai",            flag:"URU",emoji:"&#127482;&#127486;",group:"GRUPO H", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"france",      name:"França",             flag:"FRA",emoji:"&#127467;&#127479;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"norway",      name:"Noruega",            flag:"NOR",emoji:"&#127475;&#127476;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"senegal",     name:"Senegal",            flag:"SEN",emoji:"&#127480;&#127475;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"intercont2",  name:"Intercontinental 2", flag:"INT",emoji:"&#127758;",         group:"GRUPO I",tbd:true},
+  {id:"argentina",   name:"Argentina",          flag:"ARG",emoji:"&#127462;&#127479;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"argelia",     name:"Argélia",            flag:"ALG",emoji:"&#127465;&#127487;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"jordan",      name:"Jordânia",           flag:"JOR",emoji:"&#127471;&#127476;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"austria",     name:"Áustria",            flag:"AUT",emoji:"&#127462;&#127481;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"colombia",    name:"Colombia",           flag:"COL",emoji:"&#127464;&#127476;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"portugal",    name:"Portugal",           flag:"POR",emoji:"&#127477;&#127481;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"uzbekistan",  name:"Uzbequistão",        flag:"UZB",emoji:"&#127482;&#127487;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"intercont1",  name:"Intercontinental 1", flag:"INT",emoji:"&#127758;",         group:"GRUPO K",tbd:true},
+  {id:"croatia",     name:"Croácia",            flag:"CRO",emoji:"&#127469;&#127479;",group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"ghana",       name:"Gana",               flag:"GHA",emoji:"&#127468;&#127469;",group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"england",     name:"Inglaterra",         flag:"ENG",emoji:"&#127988;&#917607;&#917602;&#917605;&#917614;&#917607;&#917631;",         group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"panama",      name:"Panamá",             flag:"PAN",emoji:"&#127477;&#127462;",group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]}
+];
+var TOTAL=teams.reduce(function(s,t){return s+(t.tbd?0:tMax(t.id));},0);
+var LABELS=["Escudo","Foto Time","Goleiro","Zagueiro","Zagueiro","Lateral D","Lateral E","Vol.","Vol.","Meia","Meia","Atacante","Atacante","Destaque 1","Destaque 2","Destaque 3","Estrela","Craque","Capitao","Jovem"];
+var ICONS=["&#128737;","&#128247;","&#129354;","&#128737;","&#128737;","&#128640;","&#128640;","&#128170;","&#128170;","&#127919;","&#127919;","&#9889;","&#9889;","&#11088;","&#11088;","&#11088;","&#127775;","&#128081;","&#127942;","&#127807;"];
+var GCOLORS={"GRUPO A":"#e74c3c","GRUPO B":"#e67e22","GRUPO C":"#27ae60","GRUPO D":"#1abc9c","GRUPO E":"#3498db","GRUPO F":"#9b59b6","GRUPO G":"#e91e8c","GRUPO H":"#f39c12","GRUPO I":"#00bcd4","GRUPO J":"#ff5722","GRUPO K":"#8bc34a","GRUPO L":"#607d8b"};
+
+function getCode(tid,n){var t=teams.find(function(x){return x.id===tid;});if(t&&t.startNum!==undefined)return "#"+("000"+(t.startNum+n-1)).slice(-3);return (t?t.flag:tid.slice(0,3).toUpperCase())+"-"+("00"+n).slice(-3);}
+var collected={},curFilter="all",expanded=false,searchQuery="";
+
+function load(){try{var s=localStorage.getItem("wc26");if(s)collected=JSON.parse(s);}catch(e){}}
+function save(){try{localStorage.setItem("wc26",JSON.stringify(collected));}catch(e){}}
+function key(tid,n){return tid+"_"+n;}
+function got(tid,n){return !!collected[key(tid,n)];}
+function tMax(tid){var t=teams.find(function(x){return x.id===tid;});return(t&&t.count)?t.count:20;}
+function teamGot(tid){var c=0;for(var i=1;i<=tMax(tid);i++)if(got(tid,i))c++;return c;}
+function totalGot(){var c=0;for(var k in collected)if(collected[k])c++;return c;}
+function updProgress(){var c=totalGot();document.getElementById("pC").textContent=c;document.getElementById("pM").textContent=TOTAL-c;var pct=Math.round(c/TOTAL*100);document.getElementById("pP").textContent=pct+"%";document.getElementById("pbar").style.width=pct+"%";}
+function updTeam(tid){
+  var c=teamGot(tid),el=document.getElementById("cnt_"+tid),bar=document.getElementById("bar_"+tid),ban=document.getElementById("ban_"+tid);
+  var mx=tMax(tid);
+  if(el){el.textContent=c+"/"+mx;el.className="tcnt"+(c===mx?" done":"");}
+if(bar)bar.style.width=(c/mx*100)+"%";
+if(ban)ban.className="cbanner"+(c===mx?" show":"");
+}
+function togStk(tid,n){
+  var k=key(tid,n);collected[k]=!collected[k];save();
+  var el=document.getElementById("s_"+k);
+  if(el){var f=el.classList.contains("found");el.className="stk"+(collected[k]?" got":"")+(f?" found":"");}
+  updTeam(tid);updProgress();
+  toast((collected[k]?"+ "+getCode(tid,n)+" coletada!":"- "+getCode(tid,n)+" removida"),!collected[k]);
+}
+var tTimer;
+function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
+function setF(f){curFilter=f;["all","missing","complete"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});render();}
+function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
+function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("ÁLBUM resetado",true);}
+
+function lazyLoadGrid(tid){
+  var grid=document.getElementById("grid_"+tid);
+  if(!grid||grid.dataset.loaded==="1")return;
+  var t=teams.find(function(x){return x.id===tid;});
+  if(!t||t.tbd)return;
+  var h="";
+  var lbls = t.labels || LABELS;
+  var icos = t.icons  || ICONS;
+  var lbls=t.labels||LABELS, icos=t.icons||ICONS;
+  var max=tMax(tid);
+  for(var n=1;n<=max;n++){
+    var col=got(tid,n),code=getCode(tid,n);
+    var label=(lbls[n-1]||"").toLowerCase();
+    var isF=searchQuery&&(code.toLowerCase()===searchQuery||code.toLowerCase().indexOf(searchQuery)===0||label.indexOf(searchQuery)>=0);
+    h+='<div class="stk'+(col?" got":"")+(isF?" found":"")+'" id="s_'+key(tid,n)+'" onclick="togStk(\''+ tid +'\','+n+')">';
+    h+='<span class="schk">&#10003;</span><span class="snum">'+code+'</span><span class="slbl">'+lbls[n-1]+'</span></div>';
+  }
+  grid.innerHTML=h;
+  grid.dataset.loaded="1";
+}
+
+function toggleTeam(tid){
+  var sec=document.getElementById("sec_"+tid);
+  if(!sec)return;
+  var opening=!sec.classList.contains("open");
+  sec.classList.toggle("open");
+  if(opening)lazyLoadGrid(tid);
+}
+
+// ════════════════════════════════════════════════════════
+//  teamPassesFilter: decide se um time aparece no render
+//  Regras:
+//  1. Filtro de coleção (all/missing/complete)
+//  2. Filtro de texto (nome ou grupo)
+//  3. Filtro de código:
+//     - times TBD NUNCA passam quando há filtro de código ativo
+//     - times normais passam apenas se tiverem o código
+// ════════════════════════════════════════════════════════
+function getStickerMatches(t){
+  if(t.tbd||!searchQuery)return[];
+  var lbls=t.labels||LABELS,matches=[];
+  for(var n=1;n<=20;n++){
+    var code=getCode(t.id,n).toLowerCase();
+    var label=(lbls[n-1]||"").toLowerCase();
+    if(code===searchQuery||code.indexOf(searchQuery)===0||label.indexOf(searchQuery)>=0)matches.push(n);
+  }
+  return matches;
+}
+
+function teamPassesFilter(t){
+  var cc=teamGot(t.id),mx=tMax(t.id);
+  if(curFilter==="missing"&&cc===mx)return false;
+  if(curFilter==="complete"&&cc!==mx)return false;
+  if(!searchQuery)return true;
+  if(t.name.toLowerCase().indexOf(searchQuery)>=0)return true;
+  if(t.group.toLowerCase().indexOf(searchQuery)>=0)return true;
+  if(t.tbd)return false;
+  return getStickerMatches(t).length>0;
+}
+
+function search(q){
+  searchQuery=q.trim().toLowerCase();
+  render();
+  var bar=document.getElementById("foundBar");
+  if(!searchQuery){bar.className="found-bar";return;}
+  var total=0;
+  teams.forEach(function(t){
+    if(t.tbd)return;
+    var sec=document.getElementById("sec_"+t.id);
+    if(!sec)return;
+    var matches=getStickerMatches(t);
+    if(matches.length){
+      sec.classList.add("open");
+      lazyLoadGrid(t.id);
+      setTimeout(function(tid,ms){
+        ms.forEach(function(n){
+          var el=document.getElementById("s_"+key(tid,n));
+          if(el)el.classList.add("found");
+        });
+      }.bind(null,t.id,matches),40);
+      total+=matches.length;
+    }
+  });
+  if(total>0){
+    bar.style.cssText="";bar.className="found-bar show";
+    bar.textContent=total===1?"1 figurinha encontrada.":total+" figurinhas encontradas.";
+  } else {
+    bar.className="found-bar";
+  }
+}
+
+function render(){
+  var h="",lastGrp=null,cnt=0;
+  teams.forEach(function(t){
+    if(!teamPassesFilter(t))return;
+    cnt++;
+    if(t.group!==lastGrp){lastGrp=t.group;h+=grpHTML(t.group);}
+    h+=secHTML(t,teamGot(t.id));
+  });
+  if(!cnt)h=codeFilter
+    ?'<div class="nores">&#128269; Nenhuma selecao possui a figurinha &ldquo;'+codeFilter+'&rdquo;.</div>'
+    :'<div class="nores">Nenhuma selecao encontrada.</div>';
+  document.getElementById("MC").innerHTML=h;
+  updProgress();
+}
+
+function grpHTML(grp){
+  var c=GCOLORS[grp]||"#f0b429",l=grp.replace("GRUPO ","");if(l===grp)l="⭐";
+  var tot=0,done=0;teams.forEach(function(t){if(t.group===grp){tot++;if(teamGot(t.id)===tMax(t.id))done++;}});
+  return '<div class="glbl" style="background:linear-gradient(90deg,'+c+'18,'+c+'06,transparent);border-left:4px solid '+c+'">'+
+    '<div class="gbadge" style="background:'+c+'20;color:'+c+';border:1px solid '+c+'40;">'+l+'</div>'+
+    '<div class="ginfo"><div class="gtitle" style="color:'+c+'">'+grp+'</div><div class="gsub">'+tot+' SELEÇÕES</div></div>'+
+    '<div class="gstat"><div class="gspct" style="color:'+c+'">'+done+'/'+tot+'</div><div class="gsplbl">completas</div></div></div>';
+}
+function secHTML(t,cc){
+  var c=GCOLORS[t.group]||"#f0b429";
+  return '<div class="tsec'+(t.tbd?" tbd":"")+'" id="sec_'+t.id+'" style="border-left:3px solid '+c+'50">'+
+    '<div class="thead" onclick="toggleTeam(\''+ t.id +'\')">'+
+    '<div class="thl"><div class="tflag-box">'+t.emoji+'</div>'+
+    '<div><div class="tname">'+t.name+(t.tbd?'<span class="tbd-tag">TBD</span>':'')+'</div>'+
+    '<div class="tgrplbl" style="color:'+c+'99;">'+t.group+'</div></div></div>'+
+    '<div class="thr"><div class="tprog">'+
+    '<div class="tcnt'+(cc===(t.count||20)?" done":"")+'\" id=\"cnt_'+t.id+'">'+cc+'/'+(t.count||20)+'</div>'+
+    '<div class="tmbar"><div class="tmfill" id="bar_'+t.id+'" style="width:'+(cc/(t.count||20)*100)+'%;background:'+c+'"></div></div>'+
+    '</div><span class="chev">&#9660;</span></div></div>'+
+    '<div class="cbanner'+(cc===tMax(t.id)?" show":"")+'" id="ban_'+t.id+'">Seleção completa! Todas as figurinhas coletadas!</div>'+
+    '<div class="sgrid" id="grid_'+t.id+'" data-loaded="'+(t.tbd?"1":"0")+'">'+
+    (t.tbd?'<div class="tbd-msg">&#128274; Selecao nao confirmada pela FIFA.</div>':'')+
+    '</div></div>';
+}
+
+function getMissing(){var l=[];teams.forEach(function(t){if(t.tbd)return;var m=[];var mx=tMax(t.id);for(var n=1;n<=mx;n++)if(!got(t.id,n))m.push(getCode(t.id,n));if(m.length)l.push({team:t,codes:m});});return l;}
+function genText(){var miss=getMissing(),total=totalGot(),d=new Date().toLocaleDateString("pt-BR"),txt="ÁLBUM COPA DO MUNDO 2026\n";txt+="Data: "+d+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total)+"\n================================\n\n";if(!miss.length)txt+="ÁLBUM COMPLETO!\n";else{var lg=null;miss.forEach(function(m){if(m.team.group!==lg){lg=m.team.group;txt+="[ "+m.team.group+" ]\n";}txt+=m.team.name+" ("+m.codes.length+"): "+m.codes.join(" ")+"\n";});}return txt+"\n--- ÁLBUM Copa 2026 ---";}
+function openExp(){var total=totalGot(),miss=getMissing();document.getElementById("eMiss").textContent=TOTAL-total;document.getElementById("eGot").textContent=total;document.getElementById("eTeams").textContent=miss.length+teams.filter(function(t){return t.tbd;}).length;document.getElementById("eprev").classList.remove("show");document.getElementById("ecopy").classList.remove("show");document.getElementById("expModal").classList.add("show");}
+function closeExp(){document.getElementById("expModal").classList.remove("show");}
+function expText(){var txt=genText();document.getElementById("eprevtxt").textContent=txt;document.getElementById("eprev").classList.add("show");document.getElementById("ecopy").classList.remove("show");try{navigator.clipboard.writeText(txt).then(function(){document.getElementById("ecopy").classList.add("show");});}catch(e){var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);document.getElementById("ecopy").classList.add("show");}}
+function shareText(){var txt=genText();if(navigator.share)navigator.share({title:"Figurinhas Copa 2026",text:txt});else window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank");}
+function expImage(){var miss=getMissing(),total=totalGot(),canvas=document.getElementById("ecanvas"),ctx=canvas.getContext("2d"),W=620,P=28,rowH=26,tH=130;miss.forEach(function(m){tH+=46+Math.ceil(m.codes.length/5)*rowH;});tH+=P*2+40;canvas.width=W;canvas.height=Math.max(tH,220);var bg=ctx.createLinearGradient(0,0,W,canvas.height);bg.addColorStop(0,"#07101f");bg.addColorStop(1,"#07101f");ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);ctx.fillStyle="#f0b429";ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText("ÁLBUM COPA DO MUNDO 2026",W/2,40);ctx.fillStyle="#6b7f9a";ctx.font="12px Arial";ctx.fillText(new Date().toLocaleDateString("pt-BR")+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total),W/2,62);ctx.strokeStyle="#182840";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();ctx.fillStyle="#dce8f5";ctx.font="bold 13px Arial";ctx.textAlign="left";ctx.fillText("FIGURINHAS FALTANTES:",P,105);var y=130+P,lg=null;miss.forEach(function(m){var c=GCOLORS[m.team.group]||"#f0b429";if(m.team.group!==lg){lg=m.team.group;ctx.fillStyle=c;ctx.font="bold 11px Arial";ctx.textAlign="left";ctx.fillText(m.team.group,P,y);y+=16;}ctx.fillStyle="#f0b429";ctx.font="bold 13px Arial";ctx.fillText(m.team.name+" ("+m.codes.length+")",P,y);y+=20;var iW=(W-P*2)/5;m.codes.forEach(function(code,i){var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;ctx.fillStyle="#1a2a3d";ctx.fillRect(x,cy-13,iW-5,18);ctx.fillStyle="#dce8f5";ctx.font="10px Arial";ctx.textAlign="center";ctx.fillText(code,x+(iW-5)/2,cy);});y+=Math.ceil(m.codes.length/5)*rowH+12;});var link=document.createElement("a");link.download="figurinhas-copa2026.png";link.href=canvas.toDataURL("image/png");link.click();toast("Imagem salva!");}
+
+document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});
+document.getElementById("sbx").addEventListener("input",function(){search(this.value);});
+
+load();
+
+var _bar = document.getElementById("LSbar");
+var _ls  = document.getElementById("LS");
+
+function _prog(p){ _bar.style.width = Math.min(p,100)+"%"; }
+function _hideLS(){
+  _ls.classList.add("hide");
+  setTimeout(function(){ _ls.style.display="none"; }, 350);
+}
+render()
+_prog(0);
+
+var progAtual = 0;
+var intervalo = setInterval(function(){
+  progAtual += 2;
+  _prog(progAtual);
+  if(progAtual >= 100){
+    clearInterval(intervalo);
+    setTimeout(_hideLS, 400);
+  }
+}, 10);
+
+
+
+</script>
+</body>
+</html>

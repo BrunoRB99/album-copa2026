@@ -166,7 +166,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
     <div class="hosts">
       <div class="host-pill"><span>&#127482;&#127480;</span> USA</div>
       <div class="host-pill"><span>&#127464;&#127462;</span> CANADÁ</div>
-      <div class="host-pill"><span>&#127474;&#127485;</span> MEXICO</div>
+      <div class="host-pill"><span>&#127474;&#127485;</span> MÉXICO</div>
     </div>
     <div class="prog-outer">
       <div class="prog-nums">
@@ -444,8 +444,20 @@ function openExp(){var total=totalGot(),miss=getMissing();document.getElementByI
 function closeExp(){document.getElementById("expModal").classList.remove("show");}
 function expText(){var txt=genText();document.getElementById("eprevtxt").textContent=txt;document.getElementById("eprev").classList.add("show");document.getElementById("ecopy").classList.remove("show");try{navigator.clipboard.writeText(txt).then(function(){document.getElementById("ecopy").classList.add("show");});}catch(e){var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);document.getElementById("ecopy").classList.add("show");}}
 function shareText(){var txt=genText();if(navigator.share)navigator.share({title:"Figurinhas Copa 2026",text:txt});else window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank");}
-function expImage(){var miss=getMissing(),total=totalGot(),canvas=document.getElementById("ecanvas"),ctx=canvas.getContext("2d"),W=620,P=28,rowH=26,tH=130;miss.forEach(function(m){tH+=46+Math.ceil(m.codes.length/5)*rowH;});tH+=P*2+40;canvas.width=W;canvas.height=Math.max(tH,220);var bg=ctx.createLinearGradient(0,0,W,canvas.height);bg.addColorStop(0,"#07101f");bg.addColorStop(1,"#07101f");ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);ctx.fillStyle="#f0b429";ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText("ÁLBUM COPA DO MUNDO 2026",W/2,40);ctx.fillStyle="#6b7f9a";ctx.font="12px Arial";ctx.fillText(new Date().toLocaleDateString("pt-BR")+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total),W/2,62);ctx.strokeStyle="#182840";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();ctx.fillStyle="#dce8f5";ctx.font="bold 13px Arial";ctx.textAlign="left";ctx.fillText("FIGURINHAS FALTANTES:",P,105);var y=130+P,lg=null;miss.forEach(function(m){var c=GCOLORS[m.team.group]||"#f0b429";if(m.team.group!==lg){lg=m.team.group;ctx.fillStyle=c;ctx.font="bold 11px Arial";ctx.textAlign="left";ctx.fillText(m.team.group,P,y);y+=16;}ctx.fillStyle="#f0b429";ctx.font="bold 13px Arial";ctx.fillText(m.team.name+" ("+m.codes.length+")",P,y);y+=20;var iW=(W-P*2)/5;m.codes.forEach(function(code,i){var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;ctx.fillStyle="#1a2a3d";ctx.fillRect(x,cy-13,iW-5,18);ctx.fillStyle="#dce8f5";ctx.font="10px Arial";ctx.textAlign="center";ctx.fillText(code,x+(iW-5)/2,cy);});y+=Math.ceil(m.codes.length/5)*rowH+12;});var link=document.createElement("a");link.download="figurinhas-copa2026.png";link.href=canvas.toDataURL("image/png");link.click();toast("Imagem salva!");}
-
+function expImage(){var miss=getMissing(),total=totalGot(),canvas=document.getElementById("ecanvas"),ctx=canvas.getContext("2d"),W=620,P=28,rowH=26,tH=130;miss.forEach(function(m){tH+=46+Math.ceil(m.codes.length/5)*rowH;});tH+=P*2+40;canvas.width=W;canvas.height=Math.max(tH,220);var bg=ctx.createLinearGradient(0,0,W,canvas.height);bg.addColorStop(0,"#07101f");bg.addColorStop(1,"#07101f");ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);ctx.fillStyle="#f0b429";ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText("ÁLBUM COPA DO MUNDO 2026",W/2,40);ctx.fillStyle="#6b7f9a";ctx.font="12px Arial";ctx.fillText(new Date().toLocaleDateString("pt-BR")+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total),W/2,62);ctx.strokeStyle="#182840";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();ctx.fillStyle="#dce8f5";ctx.font="bold 13px Arial";ctx.textAlign="left";ctx.fillText("FIGURINHAS FALTANTES:",P,105);var y=130+P,lg=null;miss.forEach(function(m){var c=GCOLORS[m.team.group]||"#f0b429";if(m.team.group!==lg){lg=m.team.group;ctx.fillStyle=c;ctx.font="bold 11px Arial";ctx.textAlign="left";ctx.fillText(m.team.group,P,y);y+=16;}ctx.fillStyle="#f0b429";ctx.font="bold 13px Arial";ctx.fillText(m.team.name+" ("+m.codes.length+")",P,y);y+=20;var iW=(W-P*2)/5;m.codes.forEach(function(code,i){var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;ctx.fillStyle="#1a2a3d";ctx.fillRect(x,cy-13,iW-5,18);ctx.fillStyle="#dce8f5";ctx.font="10px Arial";ctx.textAlign="center";ctx.fillText(code,x+(iW-5)/2,cy);});y+=Math.ceil(m.codes.length/5)*rowH+12;});var dataUrl=canvas.toDataURL("image/png");
+if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([],"t.png",{type:"image/png"})]})){
+  canvas.toBlob(function(blob){
+    var file=new File([blob],"figurinhas-copa2026.png",{type:"image/png"});
+    navigator.share({files:[file],title:"Figurinhas Copa 2026"});
+  });
+}else{
+  var link=document.createElement("a");
+  link.download="figurinhas-copa2026.png";
+  link.href=dataUrl;
+  link.click();
+  toast("Imagem salva!");
+}
+}
 document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});
 document.getElementById("sbx").addEventListener("input",function(){search(this.value);});
 

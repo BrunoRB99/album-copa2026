@@ -85,7 +85,8 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 .tbd-tag{font-size:9px;background:rgba(255,200,0,.12);color:rgba(255,200,0,.7);border:1px solid rgba(255,200,0,.2);border-radius:4px;padding:1px 6px;margin-left:6px;font-weight:700;letter-spacing:1px;}
 .thr{display:flex;align-items:center;gap:12px;}
 .tprog{text-align:right;}
-.tcnt{font-family: Impact,'Arial Narrow',sans-serif;;font-size:15px;color:var(--gold);line-height:1;}
+.tcnt{font-family: Impact,'Arial Narrow',sans-serif;;font-size:28px;color:inherit;line-height:1;}
+.grp-A{color:#e74c3c}.grp-B{color:#e67e22}.grp-C{color:#27ae60}.grp-D{color:#1abc9c}.grp-E{color:#3498db}.grp-F{color:#9b59b6}.grp-G{color:#e91e8c}.grp-H{color:#f39c12}.grp-I{color:#00bcd4}.grp-J{color:#ff5722}.grp-K{color:#8bc34a}.grp-L{color:#607d8b}.grp-star{color:#f0b429}
 .tcnt.done{color:var(--green);}
 .tmbar{width:72px;height:3px;background:rgba(255,255,255,.08);border-radius:99px;overflow:hidden;margin-top:4px;}
 .tmfill{height:100%;border-radius:99px;transition:width .4s;}
@@ -225,18 +226,18 @@ var teams=[
   {id:"southkorea",  name:"Coreia do Sul",      flag:"KOR",emoji:"&#127472;&#127479;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"mexico",      name:"México",             flag:"MEX",emoji:"&#127474;&#127485;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"southafrica", name:"África do Sul",      flag:"RSA",emoji:"&#127487;&#127462;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"europaD",     name:"Europa D",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO A",tbd:true},
+  {id:"europaD",     name:"Dinamarca, Macedônia do Norte, República Tcheca ou Irlanda",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"canada",      name:"Canadá",             flag:"CAN",emoji:"&#127464;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"qatar",       name:"Catar",              flag:"QAT",emoji:"&#127478;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"switzerland", name:"Suíça",              flag:"SUI",emoji:"&#127464;&#127469;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"europaA",     name:"Europa A",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO B",tbd:true},
+  {id:"europaA",     name:"Itália, Irlanda do Norte, País de Gales e Bósnia",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;",         group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"haiti",       name:"Haiti",              flag:"HAI",emoji:"&#127469;&#127481;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"morocco",     name:"Marrocos",           flag:"MAR",emoji:"&#127474;&#127462;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"australia",   name:"Austrália",          flag:"AUS",emoji:"&#127462;&#127482;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"usa",         name:"Estados Unidos",     flag:"USA",emoji:"&#127482;&#127480;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"europaC",     name:"Europa C",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO D",tbd:true},
+  {id:"europaC",     name:"Turquia, Romênia, Eslováquia e Kosovo",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"paraguay",    name:"Paraguai",           flag:"PAR",emoji:"&#127477;&#127486;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"germany",     name:"Alemanha",           flag:"GER",emoji:"&#127465;&#127466;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"ivorycoast",  name:"Costa do Marfim",    flag:"CIV",emoji:"&#127464;&#127470;",group:"GRUPO E", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -245,7 +246,7 @@ var teams=[
   {id:"netherlands", name:"Holanda",            flag:"NED",emoji:"&#127475;&#127473;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"japan",       name:"Japão",              flag:"JPN",emoji:"&#127471;&#127477;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"tunisia",     name:"Tunísia",            flag:"TUN",emoji:"&#127481;&#127475;",group:"GRUPO F", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"europaB",     name:"Europa B",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO F",tbd:true},
+  {id:"europaB",     name:"Ucrânia, Suécia, Polônia ou Albânia",           flag:"EUR",emoji:"&#10067;",          group:"GRUPO F",labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"belgium",     name:"Bélgica",            flag:"BEL",emoji:"&#127463;&#127466;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"egypt",       name:"Egito",              flag:"EGY",emoji:"&#127466;&#127468;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"iran",        name:"Irã",                flag:"IRN",emoji:"&#127470;&#127479;",group:"GRUPO G", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -257,7 +258,7 @@ var teams=[
   {id:"france",      name:"França",             flag:"FRA",emoji:"&#127467;&#127479;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"norway",      name:"Noruega",            flag:"NOR",emoji:"&#127475;&#127476;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"senegal",     name:"Senegal",            flag:"SEN",emoji:"&#127480;&#127475;",group:"GRUPO I", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"intercont2",  name:"Intercontinental 2", flag:"INT",emoji:"&#127758;",         group:"GRUPO I",tbd:true},
+  {id:"intercont2",  name:"Iraque, Bolívia ou Suriname", flag:"INT",emoji:"&#127758;",         group:"GRUPO I",labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"argentina",   name:"Argentina",          flag:"ARG",emoji:"&#127462;&#127479;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"argelia",     name:"Argélia",            flag:"ALG",emoji:"&#127465;&#127487;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"jordan",      name:"Jordânia",           flag:"JOR",emoji:"&#127471;&#127476;",group:"GRUPO J", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -265,7 +266,7 @@ var teams=[
   {id:"colombia",    name:"Colombia",           flag:"COL",emoji:"&#127464;&#127476;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"portugal",    name:"Portugal",           flag:"POR",emoji:"&#127477;&#127481;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"uzbekistan",  name:"Uzbequistão",        flag:"UZB",emoji:"&#127482;&#127487;",group:"GRUPO K", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"intercont1",  name:"Intercontinental 1", flag:"INT",emoji:"&#127758;",         group:"GRUPO K",tbd:true},
+  {id:"intercont1",  name:"RD Congo, Nova Caledônia ou Jamaica", flag:"INT",emoji:"&#127758;",         group:"GRUPO K",labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"croatia",     name:"Croácia",            flag:"CRO",emoji:"&#127469;&#127479;",group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"ghana",       name:"Gana",               flag:"GHA",emoji:"&#127468;&#127469;",group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"england",     name:"Inglaterra",         flag:"ENG",emoji:"&#127988;&#917607;&#917602;&#917605;&#917614;&#917607;&#917631;",         group:"GRUPO L", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -285,14 +286,24 @@ function key(tid,n){return tid+"_"+n;}
 function got(tid,n){return !!collected[key(tid,n)];}
 function tMax(tid){var t=teams.find(function(x){return x.id===tid;});return(t&&t.count)?t.count:20;}
 function teamGot(tid){var c=0;for(var i=1;i<=tMax(tid);i++)if(got(tid,i))c++;return c;}
+function updGroup(grp){
+  var tot=0,done=0;
+  teams.forEach(function(t){
+    if(t.group===grp&&!t.tbd){tot++;if(teamGot(t.id)===tMax(t.id))done++;}
+  });
+  var el=document.getElementById("gspct"+grp.replace(/ /g,''));
+  if(el) el.textContent=done+'/'+tot;
+}
 function totalGot(){var c=0;for(var k in collected)if(collected[k])c++;return c;}
 function updProgress(){var c=totalGot();document.getElementById("pC").textContent=c;document.getElementById("pM").textContent=TOTAL-c;var pct=Math.round(c/TOTAL*100);document.getElementById("pP").textContent=pct+"%";document.getElementById("pbar").style.width=pct+"%";}
 function updTeam(tid){
-  var c=teamGot(tid),el=document.getElementById("cnt_"+tid),bar=document.getElementById("bar_"+tid),ban=document.getElementById("ban_"+tid);
-  var mx=tMax(tid);
-  if(el){el.textContent=c+"/"+mx;el.className="tcnt"+(c===mx?" done":"");}
-if(bar)bar.style.width=(c/mx*100)+"%";
-if(ban)ban.className="cbanner"+(c===mx?" show":"");
+  var t=teams.find(function(x){return x.id===tid;});
+  var c=teamGot(tid),mx=tMax(tid);
+  var lbl=document.getElementById("grplbl"+tid);
+  var ban=document.getElementById("ban_"+tid);
+  if(lbl) lbl.textContent=c+' de '+mx;
+  if(ban) ban.className="cbanner"+(c===mx?" show":"");
+  if(t) updGroup(t.group);
 }
 function togStk(tid,n){
   var k=key(tid,n);collected[k]=!collected[k];save();
@@ -406,9 +417,7 @@ function render(){
     if(t.group!==lastGrp){lastGrp=t.group;h+=grpHTML(t.group);}
     h+=secHTML(t,teamGot(t.id));
   });
-  if(!cnt)h=codeFilter
-    ?'<div class="nores">&#128269; Nenhuma selecao possui a figurinha &ldquo;'+codeFilter+'&rdquo;.</div>'
-    :'<div class="nores">Nenhuma selecao encontrada.</div>';
+  if(!cnt) h+='<div class="nores">'+(curFilter==='complete'?'Nenhuma seleção completa.':'Nenhuma seleção encontrada.')+'</div>';
   document.getElementById("MC").innerHTML=h;
   updProgress();
 }
@@ -419,7 +428,7 @@ function grpHTML(grp){
   return '<div class="glbl" style="background:linear-gradient(90deg,'+c+'18,'+c+'06,transparent);border-left:4px solid '+c+'">'+
     '<div class="gbadge" style="background:'+c+'20;color:'+c+';border:1px solid '+c+'40;">'+l+'</div>'+
     '<div class="ginfo"><div class="gtitle" style="color:'+c+'">'+grp+'</div><div class="gsub">'+tot+' SELEÇÕES</div></div>'+
-    '<div class="gstat"><div class="gspct" style="color:'+c+'">'+done+'/'+tot+'</div><div class="gsplbl">completas</div></div></div>';
+    '<div class="gstat"><div class="gspct" id="gspct'+grp.replace(/ /g,'')+'" style="color:'+c+'">'+done+'/'+tot+'</div><div class="gsplbl">completas</div></div></div>';
 }
 function secHTML(t,cc){
   var c=GCOLORS[t.group]||"#f0b429";
@@ -427,10 +436,9 @@ function secHTML(t,cc){
     '<div class="thead" onclick="toggleTeam(\''+ t.id +'\')">'+
     '<div class="thl"><div class="tflag-box">'+t.emoji+'</div>'+
     '<div><div class="tname">'+t.name+(t.tbd?'<span class="tbd-tag">TBD</span>':'')+'</div>'+
-    '<div class="tgrplbl" style="color:'+c+'99;">'+t.group+'</div></div></div>'+
+    '<div class="tgrplbl" id="grplbl'+t.id+'" style="color:#'+c+'99;">'+cc+' de '+tMax(t.id)+'</div></div></div>'+
     '<div class="thr"><div class="tprog">'+
-    '<div class="tcnt'+(cc===(t.count||20)?" done":"")+'\" id=\"cnt_'+t.id+'">'+cc+'/'+(t.count||20)+'</div>'+
-    '<div class="tmbar"><div class="tmfill" id="bar_'+t.id+'" style="width:'+(cc/(t.count||20)*100)+'%;background:'+c+'"></div></div>'+
+    '<div class="tcnt grp-'+t.group.replace('GRUPO ','').replace('OUTRAS','star')+'" id="cnt_'+t.id+'">'+(t.group.replace('GRUPO ','').replace('OUTRAS','\u2605'))+'</div>'+
     '</div><span class="chev">&#9660;</span></div></div>'+
     '<div class="cbanner'+(cc===tMax(t.id)?" show":"")+'" id="ban_'+t.id+'">Seleção completa! Todas as figurinhas coletadas!</div>'+
     '<div class="sgrid" id="grid_'+t.id+'" data-loaded="'+(t.tbd?"1":"0")+'">'+

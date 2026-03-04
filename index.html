@@ -185,8 +185,10 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
   <button class="cbtn act" id="fall"      onclick="setF('all')">Todas</button>
   <button class="cbtn"     id="fmissing"  onclick="setF('missing')">Faltando</button>
   <button class="cbtn"     id="fcomplete" onclick="setF('complete')">Completas</button>
+  <button class="cbtn" id="frep" onclick="setF('rep')">Repetidas</button>
   <button class="cbtn"     onclick="togAll()">&#8597; Expandir</button>
   <button class="cbtn cbtn-export" onclick="openExp()">&#128228; Exportar Faltantes</button>
+  <button class="cbtn cbtn-export" onclick="openExpRep()">&#128257; Exportar Repetidas</button>
   <button class="cbtn cbtn-red"    onclick="resetAll()">&#128465; Resetar</button>
 </div>
 <div class="found-bar" id="foundBar"></div>
@@ -217,6 +219,49 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
     </div>
   </div>
 </div>
+<div class="overlay" id="expRepModal">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mhead-ico">&#128257;</div>
+      <div class="mtitle">Exportar Repetidas</div>
+      <button class="mclose" onclick="closeExpRep()">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <p class="msub">Compartilhe sua lista de figurinhas repetidas.</p>
+      <div class="estats">
+        <div class="estat"><div class="enum" id="eRepTotal">0</div><div class="elbl">Repetidas</div></div>
+        <div class="estat"><div class="enum" id="eRepTeams">0</div><div class="elbl">Seleções</div></div>
+      </div>
+      <div class="eopts">
+        <button class="ebtn ebtn-txt" onclick="expTextRep()"><span class="eico">&#128203;</span><div class="einfo">Copiar como Texto<small>WhatsApp, Telegram ou notas</small></div></button>
+        <button class="ebtn ebtn-share" onclick="shareTextRep()"><span class="eico">&#128242;</span><div class="einfo">Compartilhar via WhatsApp<small>Abre o seletor de apps</small></div></button>
+        <button class="ebtn ebtn-img" onclick="expImageRep()"><span class="eico">&#128444;</span><div class="einfo">Salvar como Imagem PNG<small>Gera imagem para grupos</small></div></button>
+      </div>
+      <div class="eprev" id="eprevRep"><div class="eprevtxt" id="eprevtxtRep"></div></div>
+      <div class="ecopy" id="ecopyRep">&#10003; Copiado!</div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="repModal">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mhead-ico">&#128257;</div>
+      <div class="mtitle">Adicionar Repetidas</div>
+      <button class="mclose" onclick="closeRepModal()">&#10005;</button>
+    </div>
+    <div class="mbody">
+      <p class="msub">Informe o código e a quantidade de cada figurinha repetida.</p>
+      <div id="repRows"></div>
+      <button class="cbtn" style="width:100%;margin-top:8px" onclick="addRepRow()">+ Nova linha</button>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="cbtn cbtn-red" style="flex:1" onclick="closeRepModal()">Cancelar</button>
+        <button class="cbtn cbtn-export" style="flex:2" onclick="submitRepForm()">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <canvas id="ecanvas"></canvas>
 
 <script>
@@ -279,9 +324,12 @@ var GCOLORS={"GRUPO A":"#e74c3c","GRUPO B":"#e67e22","GRUPO C":"#27ae60","GRUPO 
 
 function getCode(tid,n){var t=teams.find(function(x){return x.id===tid;});if(t&&t.startNum!==undefined)return "#"+("000"+(t.startNum+n-1)).slice(-3);return (t?t.flag:tid.slice(0,3).toUpperCase())+"-"+("00"+n).slice(-3);}
 var collected={},curFilter="all",expanded=false,searchQuery="";
+var repeated={};
+function loadRep(){try{var s=localStorage.getItem('wc26rep');if(s)repeated=JSON.parse(s);}catch(e){}}
+function saveRep(){try{localStorage.setItem('wc26rep',JSON.stringify(repeated));}catch(e){}}
 
-function load(){try{var s=localStorage.getItem("wc26");if(s)collected=JSON.parse(s);}catch(e){}}
-function save(){try{localStorage.setItem("wc26",JSON.stringify(collected));}catch(e){}}
+function load(){try{var s=localStorage.getItem("wc26");if(s)collected=JSON.parse(s);}catch(e){}loadRep();}
+function save(){try{localStorage.setItem("wc26",JSON.stringify(collected));}catch(e){}loadRep();}
 function key(tid,n){return tid+"_"+n;}
 function got(tid,n){return !!collected[key(tid,n)];}
 function tMax(tid){var t=teams.find(function(x){return x.id===tid;});return(t&&t.count)?t.count:20;}
@@ -294,6 +342,120 @@ function updGroup(grp){
   var el=document.getElementById("gspct"+grp.replace(/ /g,''));
   if(el) el.textContent=done+'/'+tot;
 }
+function findStickerByCode(code){
+  code=code.trim().toUpperCase();
+  for(var i=0;i<teams.length;i++){
+    var t=teams[i],mx=tMax(t.id);
+    for(var n=1;n<=mx;n++){if(getCode(t.id,n).toUpperCase()===code)return{team:t,n:n};}
+  }
+  return null;
+}
+
+function repTeamHTML(t,stickers){
+  var c=GCOLORS[t.group]||'f0b429';
+  var total=stickers.reduce(function(s,x){return s+x.qty;},0);
+  var h='<div class="tsec" style="border-left:3px solid #'+c+'50">'+
+    '<div class="thead"><div class="thl"><div class="tflag-box">'+t.emoji+'</div>'+
+    '<div><div class="tname">'+t.name+'</div>'+
+    '<div class="tgrplbl" style="color:#'+c+'99">'+total+' repetida'+(total!==1?'s':'')+'</div>'+
+    '</div></div><div class="thr"><div class="tcnt grp-'+t.group.replace('GRUPO ','').replace('OUTRAS','star')+'">'+t.group.replace('GRUPO ','').replace('OUTRAS','\u2605')+'</div></div></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:7px;padding:14px 16px 16px;border-top:1px solid var(--border)">';
+      stickers.sort(function(a,b){return a.n-b.n;});
+
+  stickers.forEach(function(s){
+    var lbls=t.labels||LABELS;
+    var lbl=lbls[s.n-1]||'';
+    h+='<div class="stk got" style="position:relative;cursor:pointer" onclick="removeRep(\''+s.code+'\')">'+
+  '<span class="snum">'+s.code+'</span>'+
+  '<span class="slbl">'+lbl+'</span>'+
+  '<span style="position:absolute;bottom:4px;right:5px;font-size:9px;color:var(--gold);font-weight:700">x'+s.qty+'</span>'+
+  '</div>';});
+  h+='</div></div>';
+  return h;
+}
+
+function removeRep(code){
+  if(!confirm('Remover '+code+'?'))return;
+  if(!repeated[code]||repeated[code]<=0)return;
+  repeated[code]--;
+  if(repeated[code]<=0)delete repeated[code];
+  saveRep();
+  renderRepeated();
+}
+
+
+function renderRepeated(){
+  var byTeam={};
+  for(var code in repeated){
+    if(repeated[code]<=0)continue;
+    var found=findStickerByCode(code);
+    if(!found)continue;
+    if(searchQuery){
+      var _t=found.team;
+      var _lbl=(_t.labels||LABELS)[found.n-1]||'';
+      var _match=code.toLowerCase().indexOf(searchQuery)>=0||
+        _t.name.toLowerCase().indexOf(searchQuery)>=0||
+        _t.group.toLowerCase().indexOf(searchQuery)>=0||
+        _lbl.toLowerCase().indexOf(searchQuery)>=0;
+      if(!_match)continue;
+    }
+    var tid=found.team.id;
+    if(!byTeam[tid])byTeam[tid]=[];
+    byTeam[tid].push({code:code.toUpperCase(),n:found.n,qty:repeated[code]});
+  }
+  var hasAny=Object.keys(byTeam).length>0;
+  var btnH='<div style="text-align:center;padding:12px 16px 6px;max-width:960px;margin:0 auto">'+
+    '<button class="cbtn cbtn-export" onclick="openRepModal()">&#10133; Adicionar repetidas</button></div>';
+  if(!hasAny){
+    document.getElementById('MC').innerHTML=btnH+'<div class="nores">'+(searchQuery?'Nenhuma figurinha repetida encontrada.':'Não há figurinhas repetidas.')+'</div>';
+    return;
+  }
+  var h='',lastGrp=null;
+  teams.forEach(function(t){
+    if(!byTeam[t.id])return;
+    if(t.group!==lastGrp){lastGrp=t.group;h+=grpHTML(t.group);}
+    h+=repTeamHTML(t,byTeam[t.id]);
+  });
+  document.getElementById('MC').innerHTML=btnH+h;
+}
+
+
+function openRepModal(){
+  document.getElementById('repRows').innerHTML='';
+  addRepRow();
+  document.getElementById('repModal').classList.add('show');
+}
+function closeRepModal(){document.getElementById('repModal').classList.remove('show');}
+
+function addRepRow(){
+  var d=document.createElement('div');
+  d.style.cssText='display:flex;gap:8px;margin-bottom:8px;align-items:center';
+  d.innerHTML='<input class="sbox-code" style="flex:2" placeholder="Código (ex: BRA-001)" />'+
+    '<input class="sbox-code" style="flex:1;max-width:80px" type="number" min="1" value="1" />'+
+    '<button class="cbtn cbtn-red" style="padding:9px 10px" onclick="this.parentNode.remove()">&#10005;</button>';
+  document.getElementById('repRows').appendChild(d);
+}
+
+function submitRepForm(){
+  var rows=document.getElementById('repRows').children;
+  var added=0,errors=[];
+  for(var i=0;i<rows.length;i++){
+    var inputs=rows[i].querySelectorAll('input');
+    var code=inputs[0].value.trim().toUpperCase();
+    var qty=parseInt(inputs[1].value)||1;
+    if(!code)continue;
+    var found=findStickerByCode(code);
+    if(!found){errors.push(code);continue;}
+    repeated[code]=(repeated[code]||0)+qty;
+    added+=qty;
+  }
+  saveRep();
+  closeRepModal();
+  if(errors.length)toast('Código(s) inválido(s): '+errors.join(', '),true);
+  else if(added)toast(added+' repetida'+(added!==1?'s':'')+' adicionada'+(added!==1?'s':'')+'!',false);
+  renderRepeated();
+}
+
 function totalGot(){var c=0;for(var k in collected)if(collected[k])c++;return c;}
 function updProgress(){var c=totalGot();document.getElementById("pC").textContent=c;document.getElementById("pM").textContent=TOTAL-c;var pct=Math.round(c/TOTAL*100);document.getElementById("pP").textContent=pct+"%";document.getElementById("pbar").style.width=pct+"%";}
 function updTeam(tid){
@@ -314,7 +476,7 @@ function togStk(tid,n){
 }
 var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
-function setF(f){curFilter=f;["all","missing","complete"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});render();}
+function setF(f){curFilter=f;["all","missing","complete", "rep"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});if(f==='rep') renderRepeated(); else render();}
 function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
 function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("ÁLBUM resetado",true);}
 
@@ -410,6 +572,7 @@ function search(q){
 }
 
 function render(){
+  if(curFilter==='rep'){renderRepeated();return;}
   var h="",lastGrp=null,cnt=0;
   teams.forEach(function(t){
     if(!teamPassesFilter(t))return;
@@ -448,6 +611,153 @@ function secHTML(t,cc){
 
 function getMissing(){var l=[];teams.forEach(function(t){if(t.tbd)return;var m=[];var mx=tMax(t.id);for(var n=1;n<=mx;n++)if(!got(t.id,n))m.push(getCode(t.id,n));if(m.length)l.push({team:t,codes:m});});return l;}
 function genText(){var miss=getMissing(),total=totalGot(),d=new Date().toLocaleDateString("pt-BR"),txt="ÁLBUM COPA DO MUNDO 2026\n";txt+="Data: "+d+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total)+"\n================================\n\n";if(!miss.length)txt+="ÁLBUM COMPLETO!\n";else{var lg=null;miss.forEach(function(m){if(m.team.group!==lg){lg=m.team.group;txt+="[ "+m.team.group+" ]\n";}txt+=m.team.name+" ("+m.codes.length+"): "+m.codes.join(" ")+"\n";});}return txt+"\n--- ÁLBUM Copa 2026 ---";}
+function genTextRep(){
+  var txt='🔁 REPETIDAS - ÁLBUM COPA DO MUNDO 2026\n';
+  txt+='Data: '+new Date().toLocaleDateString('pt-BR')+'\n\n';
+  var byTeam={},total=0;
+  for(var code in repeated){
+    if(repeated[code]<=0)continue;
+    var found=findStickerByCode(code);
+    if(!found)continue;
+    var tid=found.team.id;
+    if(!byTeam[tid])byTeam[tid]=[];
+    byTeam[tid].push({code:code.toUpperCase(),qty:repeated[code]});
+    total+=repeated[code];
+  }
+  if(!total)return txt+'Nenhuma figurinha repetida.';
+  var lastGrp=null;
+  teams.forEach(function(t){
+    if(!byTeam[t.id])return;
+    if(t.group!==lastGrp){lastGrp=t.group;txt+='\n— '+t.group+' —\n';}
+    byTeam[t.id].sort(function(a,b){return a.code.localeCompare(b.code);});
+    txt+=t.name+': ';
+    txt+=byTeam[t.id].map(function(s){return s.code+(s.qty>1?' (x'+s.qty+')':'');}).join(', ')+'\n';
+  });
+  return txt;
+}
+
+function openExpRep(){
+  var byTeam={},total=0;
+  for(var code in repeated){
+    if(repeated[code]<=0)continue;
+    var found=findStickerByCode(code);
+    if(!found)continue;
+    if(!byTeam[found.team.id])byTeam[found.team.id]=true;
+    total+=repeated[code];
+  }
+  document.getElementById('eRepTotal').textContent=total;
+  document.getElementById('eRepTeams').textContent=Object.keys(byTeam).length;
+  document.getElementById('eprevRep').classList.remove('show');
+  document.getElementById('ecopyRep').classList.remove('show');
+  document.getElementById('expRepModal').classList.add('show');
+}
+
+function closeExpRep(){document.getElementById('expRepModal').classList.remove('show');}
+
+function expTextRep(){
+  var txt=genTextRep();
+  document.getElementById('eprevtxtRep').textContent=txt;
+  document.getElementById('eprevRep').classList.add('show');
+  document.getElementById('ecopyRep').classList.remove('show');
+  try{
+    navigator.clipboard.writeText(txt).then(function(){document.getElementById('ecopyRep').classList.add('show');});
+  }catch(e){
+    var ta=document.createElement('textarea');ta.value=txt;
+    document.body.appendChild(ta);ta.select();
+    document.execCommand('copy');document.body.removeChild(ta);
+    document.getElementById('ecopyRep').classList.add('show');
+  }
+}
+
+function shareTextRep(){
+  var txt=genTextRep();
+  if(navigator.share)navigator.share({title:'Repetidas Copa 2026',text:txt});
+  else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+function expImageRep(){
+  var byTeam={},total=0;
+  for(var code in repeated){
+    if(repeated[code]<=0)continue;
+    var found=findStickerByCode(code);
+    if(!found)continue;
+    var tid=found.team.id;
+    if(!byTeam[tid])byTeam[tid]=[];
+    byTeam[tid].push({code:code.toUpperCase(),qty:repeated[code]});
+    total+=repeated[code];
+  }
+  var canvas=document.getElementById('ecanvas'),ctx=canvas.getContext('2d');
+  var W=620,P=28,rowH=26,tH=130;
+  Object.keys(byTeam).forEach(function(tid){
+    tH+=46+Math.ceil(byTeam[tid].length/5)*rowH;
+  });
+  tH+=P*2;
+  canvas.width=W;canvas.height=Math.max(tH,220);
+  var bg=ctx.createLinearGradient(0,0,W,canvas.height);
+  bg.addColorStop(0,'#07101f');bg.addColorStop(1,'#07101f');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);
+  ctx.fillStyle='#f0b429';ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);
+  ctx.font='bold 24px Arial';ctx.textAlign='center';
+  ctx.fillText('🔁 REPETIDAS - COPA DO MUNDO 2026',W/2,40);
+  ctx.fillStyle='#6b7f9a';ctx.font='12px Arial';
+  ctx.fillText(new Date().toLocaleDateString('pt-BR')+' • '+total+' repetidas',W/2,62);
+  ctx.strokeStyle='#182840';ctx.lineWidth=1;
+  ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();
+  var y=100,lastGrp=null;
+  teams.forEach(function(t){
+    if(!byTeam[t.id])return;
+    var c='#'+(GCOLORS[t.group]||'f0b429');
+    if(t.group!==lastGrp){
+      lastGrp=t.group;
+      ctx.fillStyle=c;ctx.font='bold 11px Arial';ctx.textAlign='left';
+      ctx.fillText(t.group,P,y);y+=16;
+    }
+    ctx.fillStyle='#f0b429';ctx.font='bold 13px Arial';ctx.textAlign='left';
+    ctx.fillText(t.name+' ('+byTeam[t.id].length+')',P,y);y+=20;
+    var iW=(W-P*2)/5;
+    byTeam[t.id].sort(function(a,b){return a.code.localeCompare(b.code);});
+    byTeam[t.id].forEach(function(s,i){
+      var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;
+      ctx.fillStyle='#1a2a3d';ctx.fillRect(x,cy-13,iW-5,18);
+      ctx.fillStyle='#dce8f5';ctx.font='10px Arial';ctx.textAlign='center';
+      ctx.fillText(s.code+(s.qty>1?' x'+s.qty:''),x+(iW-5)/2,cy);
+    });
+    y+=Math.ceil(byTeam[t.id].length/5)*rowH+12;
+  });
+  if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([],'t.png',{type:'image/png'})]})){
+    canvas.toBlob(function(blob){
+      var file=new File([blob],'repetidas-copa2026.png',{type:'image/png'});
+      navigator.share({files:[file],title:'Repetidas Copa 2026'});
+    });
+  } else {
+    canvas.toBlob(function(blob){
+      var reader=new FileReader();
+      reader.onloadend=function(){
+        var base64=reader.result.split(',')[1];
+        Capacitor.Plugins.Filesystem.writeFile({path:'repetidas2026.png',data:base64,directory:'CACHE',recursive:true})
+        .then(function(res){
+          Capacitor.Plugins.Media.getAlbums().then(function(result){
+            var album=result.albums.find(function(a){return a.name==='Copa 2026';});
+            function salvar(id){
+              Capacitor.Plugins.Media.savePhoto({path:res.uri,albumIdentifier:id})
+              .then(function(){toast('Imagem salva na galeria!');})
+              .catch(function(e){toast('Erro: '+e.message,true);});
+            }
+            if(album)salvar(album.identifier);
+            else Capacitor.Plugins.Media.createAlbum({name:'Copa 2026'}).then(function(){
+              Capacitor.Plugins.Media.getAlbums().then(function(r2){
+                var a2=r2.albums.find(function(a){return a.name==='Copa 2026';});
+                if(a2)salvar(a2.identifier);
+              });
+            }).catch(function(){toast('Erro ao criar álbum.',true);});
+          });
+        }).catch(function(e){toast('Erro ao gerar imagem: '+e.message,true);});
+      };
+      reader.readAsDataURL(blob);
+    });
+  }
+}
+
+
 function openExp(){var total=totalGot(),miss=getMissing();document.getElementById("eMiss").textContent=TOTAL-total;document.getElementById("eGot").textContent=total;document.getElementById("eTeams").textContent=miss.length+teams.filter(function(t){return t.tbd;}).length;document.getElementById("eprev").classList.remove("show");document.getElementById("ecopy").classList.remove("show");document.getElementById("expModal").classList.add("show");}
 function closeExp(){document.getElementById("expModal").classList.remove("show");}
 function expText(){var txt=genText();document.getElementById("eprevtxt").textContent=txt;document.getElementById("eprev").classList.add("show");document.getElementById("ecopy").classList.remove("show");try{navigator.clipboard.writeText(txt).then(function(){document.getElementById("ecopy").classList.add("show");});}catch(e){var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);document.getElementById("ecopy").classList.add("show");}}
@@ -504,6 +814,7 @@ if(navigator.share && navigator.canShare && navigator.canShare({files:[new File(
 
 }
 document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});
+document.getElementById('expRepModal').addEventListener('click',function(e){if(e.target===this)closeExpRep();});
 document.getElementById("sbx").addEventListener("input",function(){search(this.value);});
 
 load();
@@ -516,6 +827,7 @@ function _hideLS(){
   _ls.classList.add("hide");
   setTimeout(function(){ _ls.style.display="none"; }, 350);
 }
+load()
 render()
 _prog(0);
 

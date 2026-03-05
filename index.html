@@ -13,7 +13,7 @@ body{margin:0;background:#040c18;}
 </style>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ÁLBUM Copa 2026</title>
+<title>Álbum Copa 2026</title>
 <style>
 html{background:#07101f;}
 :root{--bg:#07101f;--card:#0e1c30;--card2:#132035;--gold:#f0b429;--gold2:#e09a10;--green:#1db954;--light:#dce8f5;--muted:#6b7f9a;--border:#182840;--border2:#1e3050;}
@@ -213,7 +213,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
       <div class="eopts">
         <button class="ebtn ebtn-txt"   onclick="expText()"><span class="eico">&#128203;</span><div class="einfo">Copiar como Texto<small>WhatsApp, Telegram ou notas</small></div></button>
         <button class="ebtn ebtn-share" onclick="shareText()"><span class="eico">&#128242;</span><div class="einfo">Compartilhar via WhatsApp<small>Abre o seletor de apps</small></div></button>
-        <button class="ebtn ebtn-img"   onclick="expImage()"><span class="eico">&#128444;</span><div class="einfo">Salvar como Imagem PNG<small>Gera imagem para grupos</small></div></button>
       </div>
       <div class="eprev" id="eprev"><div class="eprevtxt" id="eprevtxt"></div><div class="ecopy" id="ecopy">&#10003; Copiado!</div></div>
     </div>
@@ -235,7 +234,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
       <div class="eopts">
         <button class="ebtn ebtn-txt" onclick="expTextRep()"><span class="eico">&#128203;</span><div class="einfo">Copiar como Texto<small>WhatsApp, Telegram ou notas</small></div></button>
         <button class="ebtn ebtn-share" onclick="shareTextRep()"><span class="eico">&#128242;</span><div class="einfo">Compartilhar via WhatsApp<small>Abre o seletor de apps</small></div></button>
-        <button class="ebtn ebtn-img" onclick="expImageRep()"><span class="eico">&#128444;</span><div class="einfo">Salvar como Imagem PNG<small>Gera imagem para grupos</small></div></button>
       </div>
       <div class="eprev" id="eprevRep"><div class="eprevtxt" id="eprevtxtRep"></div></div>
       <div class="ecopy" id="ecopyRep">&#10003; Copiado!</div>
@@ -478,7 +476,7 @@ var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
 function setF(f){curFilter=f;["all","missing","complete", "rep"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});if(f==='rep') renderRepeated(); else render();}
 function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
-function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("ÁLBUM resetado",true);}
+function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("Álbum resetado",true);}
 
 function lazyLoadGrid(tid){
   var grid=document.getElementById("grid_"+tid);
@@ -610,7 +608,7 @@ function secHTML(t,cc){
 }
 
 function getMissing(){var l=[];teams.forEach(function(t){if(t.tbd)return;var m=[];var mx=tMax(t.id);for(var n=1;n<=mx;n++)if(!got(t.id,n))m.push(getCode(t.id,n));if(m.length)l.push({team:t,codes:m});});return l;}
-function genText(){var miss=getMissing(),total=totalGot(),d=new Date().toLocaleDateString("pt-BR"),txt="ÁLBUM COPA DO MUNDO 2026\n";txt+="Data: "+d+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total)+"\n================================\n\n";if(!miss.length)txt+="ÁLBUM COMPLETO!\n";else{var lg=null;miss.forEach(function(m){if(m.team.group!==lg){lg=m.team.group;txt+="[ "+m.team.group+" ]\n";}txt+=m.team.name+" ("+m.codes.length+"): "+m.codes.join(" ")+"\n";});}return txt+"\n--- ÁLBUM Copa 2026 ---";}
+function genText(){var miss=getMissing(),total=totalGot(),d=new Date().toLocaleDateString("pt-BR"),txt="ÁLBUM COPA DO MUNDO 2026\n";txt+="Data: "+d+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total)+"\n================================\n\n";if(!miss.length)txt+="ÁLBUM COMPLETO!\n";else{var lg=null;miss.forEach(function(m){if(m.team.group!==lg){lg=m.team.group;txt+="[ "+m.team.group+" ]\n";}txt+=m.team.name+" ("+m.codes.length+"): "+m.codes.join(" ")+"\n";});}return txt+"\n--- Álbum Copa 2026 ---";}
 function genTextRep(){
   var txt='🔁 REPETIDAS - ÁLBUM COPA DO MUNDO 2026\n';
   txt+='Data: '+new Date().toLocaleDateString('pt-BR')+'\n\n';
@@ -674,145 +672,12 @@ function shareTextRep(){
   if(navigator.share)navigator.share({title:'Repetidas Copa 2026',text:txt});
   else window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
 }
-function expImageRep(){
-  var byTeam={},total=0;
-  for(var code in repeated){
-    if(repeated[code]<=0)continue;
-    var found=findStickerByCode(code);
-    if(!found)continue;
-    var tid=found.team.id;
-    if(!byTeam[tid])byTeam[tid]=[];
-    byTeam[tid].push({code:code.toUpperCase(),qty:repeated[code]});
-    total+=repeated[code];
-  }
-  var canvas=document.getElementById('ecanvas'),ctx=canvas.getContext('2d');
-  var W=620,P=28,rowH=26,tH=130;
-  Object.keys(byTeam).forEach(function(tid){
-    tH+=46+Math.ceil(byTeam[tid].length/5)*rowH;
-  });
-  tH+=P*2;
-  canvas.width=W;canvas.height=Math.max(tH,220);
-  var bg=ctx.createLinearGradient(0,0,W,canvas.height);
-  bg.addColorStop(0,'#07101f');bg.addColorStop(1,'#07101f');
-  ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);
-  ctx.fillStyle='#f0b429';ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);
-  ctx.font='bold 24px Arial';ctx.textAlign='center';
-  ctx.fillText('🔁 REPETIDAS - COPA DO MUNDO 2026',W/2,40);
-  ctx.fillStyle='#6b7f9a';ctx.font='12px Arial';
-  ctx.fillText(new Date().toLocaleDateString('pt-BR')+' • '+total+' repetidas',W/2,62);
-  ctx.strokeStyle='#182840';ctx.lineWidth=1;
-  ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();
-  var y=100,lastGrp=null;
-  teams.forEach(function(t){
-    if(!byTeam[t.id])return;
-    var c='#'+(GCOLORS[t.group]||'f0b429');
-    if(t.group!==lastGrp){
-      lastGrp=t.group;
-      ctx.fillStyle=c;ctx.font='bold 11px Arial';ctx.textAlign='left';
-      ctx.fillText(t.group,P,y);y+=16;
-    }
-    ctx.fillStyle='#f0b429';ctx.font='bold 13px Arial';ctx.textAlign='left';
-    ctx.fillText(t.name+' ('+byTeam[t.id].length+')',P,y);y+=20;
-    var iW=(W-P*2)/5;
-    byTeam[t.id].sort(function(a,b){return a.code.localeCompare(b.code);});
-    byTeam[t.id].forEach(function(s,i){
-      var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;
-      ctx.fillStyle='#1a2a3d';ctx.fillRect(x,cy-13,iW-5,18);
-      ctx.fillStyle='#dce8f5';ctx.font='10px Arial';ctx.textAlign='center';
-      ctx.fillText(s.code+(s.qty>1?' x'+s.qty:''),x+(iW-5)/2,cy);
-    });
-    y+=Math.ceil(byTeam[t.id].length/5)*rowH+12;
-  });
-  if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([],'t.png',{type:'image/png'})]})){
-    canvas.toBlob(function(blob){
-      var file=new File([blob],'repetidas-copa2026.png',{type:'image/png'});
-      navigator.share({files:[file],title:'Repetidas Copa 2026'});
-    });
-  } else {
-    canvas.toBlob(function(blob){
-      var reader=new FileReader();
-      reader.onloadend=function(){
-        var base64=reader.result.split(',')[1];
-        Capacitor.Plugins.Filesystem.writeFile({path:'repetidas2026.png',data:base64,directory:'CACHE',recursive:true})
-        .then(function(res){
-          Capacitor.Plugins.Media.getAlbums().then(function(result){
-            var album=result.albums.find(function(a){return a.name==='Copa 2026';});
-            function salvar(id){
-              Capacitor.Plugins.Media.savePhoto({path:res.uri,albumIdentifier:id})
-              .then(function(){toast('Imagem salva na galeria!');})
-              .catch(function(e){toast('Erro: '+e.message,true);});
-            }
-            if(album)salvar(album.identifier);
-            else Capacitor.Plugins.Media.createAlbum({name:'Copa 2026'}).then(function(){
-              Capacitor.Plugins.Media.getAlbums().then(function(r2){
-                var a2=r2.albums.find(function(a){return a.name==='Copa 2026';});
-                if(a2)salvar(a2.identifier);
-              });
-            }).catch(function(){toast('Erro ao criar álbum.',true);});
-          });
-        }).catch(function(e){toast('Erro ao gerar imagem: '+e.message,true);});
-      };
-      reader.readAsDataURL(blob);
-    });
-  }
-}
-
 
 function openExp(){var total=totalGot(),miss=getMissing();document.getElementById("eMiss").textContent=TOTAL-total;document.getElementById("eGot").textContent=total;document.getElementById("eTeams").textContent=miss.length+teams.filter(function(t){return t.tbd;}).length;document.getElementById("eprev").classList.remove("show");document.getElementById("ecopy").classList.remove("show");document.getElementById("expModal").classList.add("show");}
 function closeExp(){document.getElementById("expModal").classList.remove("show");}
 function expText(){var txt=genText();document.getElementById("eprevtxt").textContent=txt;document.getElementById("eprev").classList.add("show");document.getElementById("ecopy").classList.remove("show");try{navigator.clipboard.writeText(txt).then(function(){document.getElementById("ecopy").classList.add("show");});}catch(e){var ta=document.createElement("textarea");ta.value=txt;document.body.appendChild(ta);ta.select();document.execCommand("copy");document.body.removeChild(ta);document.getElementById("ecopy").classList.add("show");}}
 function shareText(){var txt=genText();if(navigator.share)navigator.share({title:"Figurinhas Copa 2026",text:txt});else window.open("https://wa.me/?text="+encodeURIComponent(txt),"_blank");}
-function expImage(){var miss=getMissing(),total=totalGot(),canvas=document.getElementById("ecanvas"),ctx=canvas.getContext("2d"),W=620,P=28,rowH=26,tH=130;miss.forEach(function(m){tH+=46+Math.ceil(m.codes.length/5)*rowH;});tH+=P*2+40;canvas.width=W;canvas.height=Math.max(tH,220);var bg=ctx.createLinearGradient(0,0,W,canvas.height);bg.addColorStop(0,"#07101f");bg.addColorStop(1,"#07101f");ctx.fillStyle=bg;ctx.fillRect(0,0,W,canvas.height);ctx.fillStyle="#f0b429";ctx.fillRect(0,0,W,3);ctx.fillRect(0,canvas.height-3,W,3);ctx.font="bold 24px Arial";ctx.textAlign="center";ctx.fillText("ÁLBUM COPA DO MUNDO 2026",W/2,40);ctx.fillStyle="#6b7f9a";ctx.font="12px Arial";ctx.fillText(new Date().toLocaleDateString("pt-BR")+" | Coletadas: "+total+"/"+TOTAL+" | Faltando: "+(TOTAL-total),W/2,62);ctx.strokeStyle="#182840";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(P,80);ctx.lineTo(W-P,80);ctx.stroke();ctx.fillStyle="#dce8f5";ctx.font="bold 13px Arial";ctx.textAlign="left";ctx.fillText("FIGURINHAS FALTANTES:",P,105);var y=130+P,lg=null;miss.forEach(function(m){var c=GCOLORS[m.team.group]||"#f0b429";if(m.team.group!==lg){lg=m.team.group;ctx.fillStyle=c;ctx.font="bold 11px Arial";ctx.textAlign="left";ctx.fillText(m.team.group,P,y);y+=16;}ctx.fillStyle="#f0b429";ctx.font="bold 13px Arial";ctx.fillText(m.team.name+" ("+m.codes.length+")",P,y);y+=20;var iW=(W-P*2)/5;m.codes.forEach(function(code,i){var x=P+(i%5)*iW,cy=y+Math.floor(i/5)*rowH;ctx.fillStyle="#1a2a3d";ctx.fillRect(x,cy-13,iW-5,18);ctx.fillStyle="#dce8f5";ctx.font="10px Arial";ctx.textAlign="center";ctx.fillText(code,x+(iW-5)/2,cy);});y+=Math.ceil(m.codes.length/5)*rowH+12;});var dataUrl=canvas.toDataURL("image/png");
-if(navigator.share && navigator.canShare && navigator.canShare({files:[new File([],"t.png",{type:"image/png"})]})){
-  canvas.toBlob(function(blob){
-    var file=new File([blob],"figurinhas-copa2026.png",{type:"image/png"});
-    navigator.share({files:[file],title:"Figurinhas Copa 2026"});
-  });
-}else{
-  canvas.toBlob(function(blob){
-    var reader = new FileReader();
-    reader.onloadend = function(){
-      var base64 = reader.result.split(",")[1];
-      Capacitor.Plugins.Filesystem.writeFile({
-        path: "copa2026.png",
-        data: base64,
-        directory: "CACHE",
-        recursive: true
-      }).then(function(res){
-        Capacitor.Plugins.Media.getAlbums().then(function(result){
-          var album = result.albums.find(function(a){ return a.name === "Copa 2026"; });
-          function salvar(id){
-            Capacitor.Plugins.Media.savePhoto({
-              path: res.uri,
-              albumIdentifier: id
-            }).then(function(){
-              toast("Imagem salva na galeria!");
-            }).catch(function(e){
-              toast("Erro: " + e.message);
-            });
-          }
-          if(album){
-            salvar(album.identifier);
-          } else {
-            Capacitor.Plugins.Media.createAlbum({name:"Copa 2026"}).then(function(){
-              Capacitor.Plugins.Media.getAlbums().then(function(r2){
-                var a2 = r2.albums.find(function(a){ return a.name === "Copa 2026"; });
-                if(a2) salvar(a2.identifier);
-              });
-            }).catch(function(){
-              toast("Erro ao criar álbum.");
-            });
-          }
-        });
-      }).catch(function(e){
-        toast("Erro ao gerar imagem: " + e.message);
-      });
-    };
-    reader.readAsDataURL(blob);
-  });
-}
 
-}
 document.getElementById("expModal").addEventListener("click",function(e){if(e.target===this)closeExp();});
 document.getElementById('expRepModal').addEventListener('click',function(e){if(e.target===this)closeExpRep();});
 document.getElementById("sbx").addEventListener("input",function(){search(this.value);});

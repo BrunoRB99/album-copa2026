@@ -403,7 +403,7 @@ function renderRepeated(){
   }
   var hasAny=Object.keys(byTeam).length>0;
   var btnH='<div style="text-align:center;padding:12px 16px 6px;max-width:960px;margin:0 auto">'+
-    '<button class="cbtn cbtn-export" onclick="openRepModal()">&#10133; Adicionar repetidas</button></div>';
+    '<button class="cbtn cbtn-export" onclick="openRepModal()">&#10133; Adicionar repetidas</button><button class="cbtn cbtn-red" onclick="resetRep()">🗑️ Resetar Repetidas</button></div>';
   if(!hasAny){
     document.getElementById('MC').innerHTML=btnH+'<div class="nores">'+(searchQuery?'Nenhuma figurinha repetida encontrada.':'Não há figurinhas repetidas.')+'</div>';
     return;
@@ -477,6 +477,24 @@ function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg
 function setF(f){curFilter=f;["all","missing","complete", "rep"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});if(f==='rep') renderRepeated(); else render();}
 function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
 function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("Álbum resetado",true);}
+function resetRep() {
+  // Verifica se há repetidas para resetar
+  if (Object.keys(repeated).length === 0) {
+    toast('Nenhuma repetida para resetar.', true);
+    return;
+  }
+  // Pede confirmação antes de apagar
+  if (!confirm('Resetar TODAS as repetidas?')) return;
+  // Substitui o objeto repeated por um vazio
+  repeated = {};
+  // Salva no localStorage
+  saveRep();
+  // Redesenha a aba repetidas
+  renderRepeated();
+  // Mostra mensagem de sucesso
+  toast('Repetidas resetadas!', true);
+}
+
 
 function lazyLoadGrid(tid){
   var grid=document.getElementById("grid_"+tid);

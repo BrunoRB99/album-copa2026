@@ -181,18 +181,39 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 </header>
 
 <div class="controls">
-  <select id="albumSel" class="sbox" style="flex:0;min-width:110px;max-width:150px" onchange="switchAlbum(this.value)"></select>
-<button class="cbtn cbtn-export" onclick="openAlbumModal()" title="Gerenciar álbuns">📚 Álbuns</button>
-  <input class="sbox" id="sbx" type="text" placeholder="&#128269; Buscar seleção, código ou jogador">
-  <button class="cbtn act" id="fall"      onclick="setF('all')">Todas</button>
-  <button class="cbtn"     id="fmissing"  onclick="setF('missing')">Faltando</button>
-  <button class="cbtn"     id="fcomplete" onclick="setF('complete')">Completas</button>
-  <button class="cbtn" id="frep" onclick="setF('rep')">Repetidas</button>
-  <button class="cbtn"     onclick="togAll()">&#8597; Expandir</button>
-  <button class="cbtn cbtn-export" onclick="openExp()">&#128228; Exportar Faltantes</button>
-  <button class="cbtn cbtn-export" onclick="openExpRep()">&#128257; Exportar Repetidas</button>
-  <button class="cbtn cbtn-red"    onclick="resetAll()">&#128465; Resetar</button>
+
+  <!-- Linha 1: álbuns + ações rápidas -->
+  <div style="display:flex;gap:8px;width:70%;align-items:center">
+    <select id="albumSel" class="sbox" style="flex:1;min-width:80px;max-width:none" onchange="switchAlbum(this.value)"></select>
+    <button class="cbtn cbtn-export" onclick="openAlbumModal()">📚 Álbuns</button>
+    <button class="cbtn" onclick="togAll()">&#8597; Expandir</button>
+    <button class="cbtn cbtn-red" onclick="resetAll()">🗑️ Resetar</button>
+  </div>
+
+  <!-- Linha 2: buscador -->
+  <div style="display:flex;width:100%;justify-content:center">
+    <input class="sbox" id="sbx" type="text" placeholder="🔍 Buscar seleção, código ou jogador"
+      style="width:70%;flex:none;max-width:none" oninput="search(this.value)">
+  </div>
+
+  <!-- Linha 3: filtro de visualização -->
+  <div style="display:flex;width:70%">
+    <select id="filterSel" class="sbox" style="width:100%;max-width:none;text-align: center;" onchange="setF(this.value)">
+      <option value="all">Todas</option>
+      <option value="missing">Faltando</option>
+      <option value="complete">Completas</option>
+      <option value="rep">Repetidas</option>
+    </select>
+  </div>
+
+  <!-- Linha 4: exportar -->
+  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:70%">
+    <button class="cbtn cbtn-export" onclick="openExp()">&#128228; Exportar Faltantes</button>
+    <button class="cbtn cbtn-export" onclick="openExpRep()">&#128257; Exportar Repetidas</button>
+  </div>
+
 </div>
+
 <div class="found-bar" id="foundBar"></div>
 
 <main id="MC"></main>
@@ -514,7 +535,13 @@ function togStk(tid,n){
 }
 var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
-function setF(f){curFilter=f;["all","missing","complete", "rep"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});if(f==='rep') renderRepeated(); else render();}
+function setF(f) {
+  curFilter = f;
+  var sel = document.getElementById('filterSel');
+  if (sel && sel.value !== f) sel.value = f;
+  if (f === 'rep') renderRepeated();
+  else render();
+}
 function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
 function resetAll() {
   var name = (albums.find(function(a){ return a.id === curAlbum; }) || {name:'atual'}).name;

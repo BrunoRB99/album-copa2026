@@ -487,14 +487,17 @@ function openRepModal(){
 }
 function closeRepModal(){document.getElementById('repModal').classList.remove('show');}
 
-function addRepRow(){
-  var d=document.createElement('div');
-  d.style.cssText='display:flex;gap:8px;margin-bottom:8px;align-items:center';
-  d.innerHTML='<input class="sbox-code" style="flex:2" placeholder="Código (ex: BRA-001)" />'+
-    '<input class="sbox-code" style="flex:1;max-width:80px" type="number" min="1" value="1" />'+
-    '<button class="cbtn cbtn-red" style="padding:9px 10px" onclick="this.parentNode.remove()">&#10005;</button>';
+function addRepRow() {
+  var d = document.createElement('div');
+  d.style.cssText = 'display:flex;gap:6px;margin-bottom:8px;align-items:center;width:100%;box-sizing:border-box';
+  d.innerHTML = `
+    <input class="sbox-code" style="flex:2;min-width:0;box-sizing:border-box" placeholder="Código (ex: BRA-001)">
+    <input class="sbox-code" style="flex:1;min-width:0;max-width:70px;box-sizing:border-box" type="number" min="1" value="1">
+    <button class="cbtn cbtn-red" style="flex-shrink:0;padding:9px 10px" onclick="this.parentNode.remove()">✕</button>
+  `;
   document.getElementById('repRows').appendChild(d);
 }
+
 
 function submitRepForm(){
   var rows=document.getElementById('repRows').children;

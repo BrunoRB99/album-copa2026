@@ -685,7 +685,7 @@ function saveAlbums() {
 
 function switchAlbum(id) {
   curAlbum = id;
-  try { localStorage.setItem('wc26_cur', id); } catch(e) {}
+  try { localStorage.setItem('wc26cur', id); } catch(e) {}
   collected = {};
   repeated = {};
   load();
@@ -695,13 +695,13 @@ function switchAlbum(id) {
   });
   curFilter = 'all';
   expanded = false;
-  ['fall','fmissing','fcomplete','frep'].forEach(function(x) {
-    document.getElementById(x).className = 'cbtn' + (x === 'fall' ? ' act' : '');
-  });
+  var sel = document.getElementById('filterSel');
+  if (sel) sel.value = 'all';
   render();
   updProgress();
   renderAlbumSelector();
 }
+
 
 function renderAlbumSelector() {
   var sel = document.getElementById('albumSel');

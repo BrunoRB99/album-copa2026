@@ -182,12 +182,12 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 
 <div class="controls">
 
-  <!-- Linha 1: álbuns + ações rápidas -->
-  <div style="display:flex;gap:8px;width:70%;align-items:center">
-    <select id="albumSel" class="sbox" style="flex:1;min-width:80px;max-width:none" onchange="switchAlbum(this.value)"></select>
-    <button class="cbtn cbtn-export" onclick="openAlbumModal()">📚 Álbuns</button>
-    <button class="cbtn" onclick="togAll()">&#8597; Expandir</button>
-    <button class="cbtn cbtn-red" onclick="resetAll()">🗑️ Resetar</button>
+  <!-- Linha 1: álbuns + ações (100% para caber no celular) -->
+  <div style="display:flex;gap:6px;width:100%;align-items:center">
+    <select id="albumSel" class="sbox" style="flex:1;min-width:0;font-size:11px" onchange="switchAlbum(this.value)"></select>
+    <button class="cbtn cbtn-export" onclick="openAlbumModal()" style="white-space:nowrap;font-size:11px;padding:8px 10px">📚 Álbuns</button>
+    <button class="cbtn" onclick="togAll()" style="white-space:nowrap;font-size:11px;padding:8px 10px">⊞ Expandir</button>
+    <button class="cbtn cbtn-red" onclick="resetAll()" style="white-space:nowrap;font-size:11px;padding:8px 10px">🔄 Resetar</button>
   </div>
 
   <!-- Linha 2: buscador -->
@@ -196,9 +196,9 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
       style="width:70%;flex:none;max-width:none" oninput="search(this.value)">
   </div>
 
-  <!-- Linha 3: filtro de visualização -->
-  <div style="display:flex;width:70%">
-    <select id="filterSel" class="sbox" style="width:100%;max-width:none;text-align: center;" onchange="setF(this.value)">
+  <!-- Linha 3: filtro -->
+  <div style="display:flex;width:100%;justify-content:center">
+    <select id="filterSel" class="sbox" style="width:70%;max-width:none;text-align:center" onchange="setF(this.value)">
       <option value="all">Todas</option>
       <option value="missing">Faltando</option>
       <option value="complete">Completas</option>
@@ -206,13 +206,14 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
     </select>
   </div>
 
-  <!-- Linha 4: exportar -->
-  <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:70%">
-    <button class="cbtn cbtn-export" onclick="openExp()">&#128228; Exportar Faltantes</button>
-    <button class="cbtn cbtn-export" onclick="openExpRep()">&#128257; Exportar Repetidas</button>
+  <!-- Linha 4: exportar lado a lado -->
+  <div style="display:flex;gap:8px;width:70%;margin:0 auto">
+    <button class="cbtn cbtn-export" onclick="openExp()" style="flex:1">📋 Exportar Faltantes</button>
+    <button class="cbtn cbtn-export" onclick="openExpRep()" style="flex:1">📊 Exportar Repetidas</button>
   </div>
 
 </div>
+
 
 <div class="found-bar" id="foundBar"></div>
 

@@ -181,6 +181,8 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 </header>
 
 <div class="controls">
+  <select id="albumSel" class="sbox" style="flex:0;min-width:110px;max-width:150px" onchange="switchAlbum(this.value)"></select>
+<button class="cbtn cbtn-export" onclick="openAlbumModal()" title="Gerenciar álbuns">📚 Álbuns</button>
   <input class="sbox" id="sbx" type="text" placeholder="&#128269; Buscar seleção, código ou jogador">
   <button class="cbtn act" id="fall"      onclick="setF('all')">Todas</button>
   <button class="cbtn"     id="fmissing"  onclick="setF('missing')">Faltando</button>
@@ -259,6 +261,24 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
     </div>
   </div>
 </div>
+<div class="overlay" id="albumModal">
+  <div class="modal">
+    <div class="mhead">
+      <div class="mhead-ico">📚</div>
+      <div class="mtitle">Gerenciar Álbuns</div>
+      <button class="mclose" onclick="closeAlbumModal()">✕</button>
+    </div>
+    <div class="mbody">
+      <p class="msub">Crie ou alterne entre seus álbuns. Cada álbum tem figurinhas independentes.</p>
+      <div id="albumListEl"></div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <input class="sbox" id="newAlbumName" placeholder="Nome do novo álbum" style="flex:1">
+        <button class="cbtn cbtn-export" onclick="addAlbumFromModal()">➕ Criar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <canvas id="ecanvas"></canvas>
 
@@ -323,11 +343,31 @@ var GCOLORS={"GRUPO A":"#e74c3c","GRUPO B":"#e67e22","GRUPO C":"#27ae60","GRUPO 
 function getCode(tid,n){var t=teams.find(function(x){return x.id===tid;});if(t&&t.startNum!==undefined)return "#"+("000"+(t.startNum+n-1)).slice(-3);return (t?t.flag:tid.slice(0,3).toUpperCase())+"-"+("00"+n).slice(-3);}
 var collected={},curFilter="all",expanded=false,searchQuery="";
 var repeated={};
-function loadRep(){try{var s=localStorage.getItem('wc26rep');if(s)repeated=JSON.parse(s);}catch(e){}}
-function saveRep(){try{localStorage.setItem('wc26rep',JSON.stringify(repeated));}catch(e){}}
+var curAlbum = 'a1';
+var albums = [];
+function loadRep() {
+  try {
+    var s = localStorage.getItem('wc26rep_' + curAlbum);
+    if (s) repeated = JSON.parse(s);
+  } catch(e) {}
+}
 
-function load(){try{var s=localStorage.getItem("wc26");if(s)collected=JSON.parse(s);}catch(e){}loadRep();}
-function save(){try{localStorage.setItem("wc26",JSON.stringify(collected));}catch(e){}loadRep();}
+function saveRep() {
+  try { localStorage.setItem('wc26rep_' + curAlbum, JSON.stringify(repeated)); } catch(e) {}
+}
+
+function load() {
+  try {
+    var s = localStorage.getItem('wc26_' + curAlbum);
+    if (s) collected = JSON.parse(s);
+  } catch(e) {}
+  loadRep();
+}
+
+function save() {
+  try { localStorage.setItem('wc26_' + curAlbum, JSON.stringify(collected)); } catch(e) {}
+}
+
 function key(tid,n){return tid+"_"+n;}
 function got(tid,n){return !!collected[key(tid,n)];}
 function tMax(tid){var t=teams.find(function(x){return x.id===tid;});return(t&&t.count)?t.count:20;}
@@ -476,7 +516,9 @@ var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
 function setF(f){curFilter=f;["all","missing","complete", "rep"].forEach(function(x){document.getElementById("f"+x).className="cbtn"+(x===f?" act":"");});if(f==='rep') renderRepeated(); else render();}
 function togAll(){expanded=!expanded;teams.forEach(function(t){var s=document.getElementById("sec_"+t.id);if(s){s.classList.toggle("open",expanded);if(expanded)lazyLoadGrid(t.id);}});}
-function resetAll(){if(!confirm("Resetar TODAS as figurinhas?"))return;collected={};save();render();updProgress();toast("Álbum resetado",true);}
+function resetAll() {
+  var name = (albums.find(function(a){ return a.id === curAlbum; }) || {name:'atual'}).name;
+  if (!confirm('Resetar TODAS as figurinhas do álbum "' + name + '"?')) return;collected={};save();render();updProgress();toast("Álbum resetado",true);}
 function resetRep() {
   // Verifica se há repetidas para resetar
   if (Object.keys(repeated).length === 0) {
@@ -484,7 +526,8 @@ function resetRep() {
     return;
   }
   // Pede confirmação antes de apagar
-  if (!confirm('Resetar TODAS as repetidas?')) return;
+    var name = (albums.find(function(a){ return a.id === curAlbum; }) || {name:'atual'}).name;
+  if (!confirm('Resetar TODAS as repetidas do álbum "' + name + '"?')) return;
   // Substitui o objeto repeated por um vazio
   repeated = {};
   // Salva no localStorage
@@ -586,6 +629,131 @@ function search(q){
     bar.className="found-bar";
   }
 }
+function loadAlbums() {
+  try {
+    var s = localStorage.getItem('wc26_albums');
+    if (s) albums = JSON.parse(s);
+    // migração: se não há álbuns mas há dados antigos, cria o Álbum 1 com eles
+    if (!albums.length) {
+      albums = [{id: 'a1', name: 'Álbum 1'}];
+      saveAlbums();
+      var oldC = localStorage.getItem('wc26');
+      var oldR = localStorage.getItem('wc26rep');
+      if (oldC) localStorage.setItem('wc26_a1', oldC);
+      if (oldR) localStorage.setItem('wc26rep_a1', oldR);
+    }
+    curAlbum = localStorage.getItem('wc26_cur') || albums[0].id;
+  } catch(e) {
+    albums = [{id: 'a1', name: 'Álbum 1'}];
+    curAlbum = 'a1';
+  }
+}
+
+function saveAlbums() {
+  try { localStorage.setItem('wc26_albums', JSON.stringify(albums)); } catch(e) {}
+}
+
+function switchAlbum(id) {
+  curAlbum = id;
+  try { localStorage.setItem('wc26_cur', id); } catch(e) {}
+  collected = {};
+  repeated = {};
+  load();
+  document.querySelectorAll('.sgrid').forEach(function(g) {
+    g.dataset.loaded = '';
+    g.innerHTML = '';
+  });
+  curFilter = 'all';
+  expanded = false;
+  ['fall','fmissing','fcomplete','frep'].forEach(function(x) {
+    document.getElementById(x).className = 'cbtn' + (x === 'fall' ? ' act' : '');
+  });
+  render();
+  updProgress();
+  renderAlbumSelector();
+}
+
+function renderAlbumSelector() {
+  var sel = document.getElementById('albumSel');
+  if (!sel) return;
+  sel.innerHTML = albums.map(function(a) {
+    return '<option value="' + a.id + '"' + (a.id === curAlbum ? ' selected' : '') + '>' + a.name + '</option>';
+  }).join('');
+}
+
+function openAlbumModal() {
+  document.getElementById('albumModal').classList.add('show');
+  renderAlbumList();
+}
+
+function closeAlbumModal() {
+  document.getElementById('albumModal').classList.remove('show');
+}
+
+function renderAlbumList() {
+  var el = document.getElementById('albumListEl');
+  el.innerHTML = albums.map(function(a) {
+    var isActive = a.id === curAlbum;
+    return '<div style="display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--border)">'
+      + '<span style="flex:1;font-size:13px;color:' + (isActive ? 'var(--gold)' : 'var(--light)') + '">'
+      + a.name + (isActive ? ' ✓' : '') + '</span>'
+      + '<button class="cbtn" onclick="renameAlbum(\'' + a.id + '\')">✏️ Renomear</button>'
+      + (albums.length > 1
+          ? '<button class="cbtn cbtn-red" onclick="deleteAlbumById(\'' + a.id + '\')">🗑</button>'
+          : '')
+      + '</div>';
+  }).join('');
+}
+
+function renameAlbum(id) {
+  var album = albums.find(function(a) { return a.id === id; });
+  if (!album) return;
+  var newName = prompt('Novo nome para "' + album.name + '":', album.name);
+  if (!newName || !newName.trim()) return;
+  album.name = newName.trim();
+  saveAlbums();
+  renderAlbumList();
+  renderAlbumSelector();
+  toast('Álbum renomeado!');
+}
+
+
+function switchAlbumAndClose(id) {
+  switchAlbum(id);
+  closeAlbumModal();
+}
+
+function addAlbumFromModal() {
+  var input = document.getElementById('newAlbumName');
+  var name = input.value.trim();
+  if (!name) { toast('Digite um nome para o álbum.', true); return; }
+  var id = 'a' + Date.now();
+  albums.push({id: id, name: name});
+  saveAlbums();
+  input.value = '';
+  renderAlbumList();
+  renderAlbumSelector();
+  toast('Álbum "' + name + '" criado!');
+}
+
+
+function deleteAlbumById(id) {
+  var album = albums.find(function(a){ return a.id === id; });
+  var name = album ? album.name : 'este álbum';
+  if (!confirm('Excluir o álbum "' + name + '" e todas as suas figurinhas?')) return;
+  var wasActive = id === curAlbum;
+  albums = albums.filter(function(a) { return a.id !== id; });
+  saveAlbums();
+  try {
+    localStorage.removeItem('wc26_' + id);
+    localStorage.removeItem('wc26rep_' + id);
+  } catch(e) {}
+  if (wasActive) switchAlbum(albums[0].id);
+  renderAlbumList();
+  renderAlbumSelector();
+  toast('Álbum "' + name + '" excluído.', true);
+}
+
 
 function render(){
   if(curFilter==='rep'){renderRepeated();return;}
@@ -596,7 +764,7 @@ function render(){
     if(t.group!==lastGrp){lastGrp=t.group;h+=grpHTML(t.group);}
     h+=secHTML(t,teamGot(t.id));
   });
-  if(!cnt) h+='<div class="nores">'+(curFilter==='complete'?'Nenhuma seleção completa.':'Nenhuma seleção encontrada.')+'</div>';
+  if(!cnt) h+='<div class="nores">'+(curFilter==='complete'?'Nenhuma seleção completa.':'Nenhuma seleção faltando.')+'</div>';
   document.getElementById("MC").innerHTML=h;
   updProgress();
 }
@@ -710,8 +878,10 @@ function _hideLS(){
   _ls.classList.add("hide");
   setTimeout(function(){ _ls.style.display="none"; }, 350);
 }
-load()
-render()
+loadAlbums();
+load();
+render();
+renderAlbumSelector();
 _prog(0);
 
 var progAtual = 0;

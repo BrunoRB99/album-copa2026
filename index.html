@@ -1,90 +1,3 @@
-// No início do app, ANTES de qualquer outra coisa:
-(async function() {
-  const loggedIn = await AUTH.init();
-
-  const loginScreen = document.getElementById('login-screen');
-  const loginBtn    = document.getElementById('login-btn');
-  const loginError  = document.getElementById('login-error');
-
-  if (!loggedIn) {
-    // Mostra tela de login
-    loginScreen.style.display = 'flex';
-
-    loginBtn.addEventListener('click', async () => {
-      const u = document.getElementById('login-user').value.trim();
-      const p = document.getElementById('login-pass').value;
-      loginBtn.textContent = 'Entrando...';
-      const ok = await AUTH.login(u, p);
-      if (ok) {
-        loginScreen.style.display = 'none';
-        initApp(); // ← sua função de inicialização atual
-        if (AUTH.isAdmin()) {
-document.getElementById('btn-admin').style.display = 'inline-block';
-}
-      } else {
-        loginError.textContent = 'Usuário ou senha incorretos.';
-        loginError.style.display = 'block';
-        loginBtn.textContent = 'Entrar';
-      }
-    });
-
-    // Login com Enter
-    document.getElementById('login-pass').addEventListener('keydown', e => {
-      if (e.key === 'Enter') loginBtn.click();
-    });
-
-  } else {
-    loginScreen.style.display = 'none';
-    initApp();
-  }
-})();
-
-// ─── FUNÇÕES ADMIN ────────────────────────────────────────────
-function renderAdminUsers() {
-  const users = AUTH.getUsers();
-  const list = document.getElementById('admin-user-list');
-  list.innerHTML = Object.entries(users).map(([u, d]) => `
-    <div style="display:flex; justify-content:space-between; align-items:center;
-      padding:8px 12px; background:#1f2937; border-radius:7px; margin-bottom:8px;">
-      <span style="color:#e5e7eb; font-size:14px;">
-        ${u} ${d.isAdmin ? '<span style="color:#60a5fa;font-size:11px;">[admin]</span>' : ''}
-      </span>
-      ${u !== AUTH.currentUser ? `
-        <button onclick="adminDeleteUser('${u}')"
-          style="background:#7f1d1d; color:#fca5a5; border:none; border-radius:5px;
-          padding:4px 10px; font-size:12px; cursor:pointer;">
-          Remover
-        </button>` : '<span style="color:#6b7280; font-size:12px;">você</span>'}
-    </div>`).join('');
-}
-
-async function adminAddUser() {
-  const u = document.getElementById('new-username').value.trim().toLowerCase();
-  const p = document.getElementById('new-password').value;
-  const isAdmin = document.getElementById('new-is-admin').checked;
-  if (!u || !p) return alert('Preencha usuário e senha.');
-  const users = AUTH.getUsers();
-  if (users[u]) return alert('Usuário já existe.');
-  users[u] = { hash: await AUTH.hash(p), isAdmin };
-  AUTH.saveUsers(users);
-  document.getElementById('new-username').value = '';
-  document.getElementById('new-password').value = '';
-  renderAdminUsers();
-}
-
-function adminDeleteUser(username) {
-  if (!confirm(`Remover usuário "${username}"? Os dados dele serão preservados no dispositivo.`)) return;
-  const users = AUTH.getUsers();
-  delete users[username];
-  AUTH.saveUsers(users);
-  renderAdminUsers();
-}
-
-function openAdminPanel() {
-  if (!AUTH.isAdmin()) return;
-  renderAdminUsers();
-  document.getElementById('admin-panel').style.display = 'flex';
-}
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -236,61 +149,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 </head>
 <body>
 
-  <!-- TELA DE LOGIN (antes do #app ou similar) -->
-<div id="login-screen" style="display:none; position:fixed; inset:0; background:#0a0f1e;
-  display:flex; align-items:center; justify-content:center; z-index:9999; flex-direction:column;">
-  <div style="background:#111827; border:1px solid #1f2937; border-radius:12px;
-    padding:32px; width:320px; max-width:90vw;">
-    <h2 style="color:#fff; text-align:center; margin-bottom:24px; font-size:20px;">
-      🏆 Album Copa 2026
-    </h2>
-    <div id="login-error" style="display:none; background:#7f1d1d; color:#fca5a5;
-      padding:8px 12px; border-radius:6px; margin-bottom:16px; font-size:13px;"></div>
-    <input id="login-user" type="text" placeholder="Usuário" autocomplete="username"
-      style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #374151;
-      background:#1f2937; color:#fff; font-size:15px; margin-bottom:12px; box-sizing:border-box;">
-    <input id="login-pass" type="password" placeholder="Senha" autocomplete="current-password"
-      style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid #374151;
-      background:#1f2937; color:#fff; font-size:15px; margin-bottom:16px; box-sizing:border-box;">
-    <button id="login-btn"
-      style="width:100%; padding:12px; background:#2563eb; color:#fff; border:none;
-      border-radius:8px; font-size:15px; font-weight:600; cursor:pointer;">
-      Entrar
-    </button>
-  </div>
-</div>
-
-<!-- PAINEL ADMIN (modal oculto) -->
-<div id="admin-panel" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.8);
-  z-index:9998; align-items:center; justify-content:center;">
-  <div style="background:#111827; border:1px solid #374151; border-radius:12px;
-    padding:28px; width:400px; max-width:92vw; max-height:80vh; overflow-y:auto;">
-    <h3 style="color:#fff; margin-bottom:20px;">⚙️ Painel Admin — Usuários</h3>
-    <div id="admin-user-list" style="margin-bottom:20px;"></div>
-    <hr style="border-color:#374151; margin-bottom:20px;">
-    <h4 style="color:#9ca3af; font-size:13px; margin-bottom:12px;">ADICIONAR USUÁRIO</h4>
-    <input id="new-username" type="text" placeholder="Usuário"
-      style="width:100%; padding:9px 12px; border-radius:7px; border:1px solid #374151;
-      background:#1f2937; color:#fff; font-size:14px; margin-bottom:10px; box-sizing:border-box;">
-    <input id="new-password" type="password" placeholder="Senha"
-      style="width:100%; padding:9px 12px; border-radius:7px; border:1px solid #374151;
-      background:#1f2937; color:#fff; font-size:14px; margin-bottom:10px; box-sizing:border-box;">
-    <label style="color:#9ca3af; font-size:13px; display:flex; align-items:center; gap:8px; margin-bottom:16px;">
-      <input id="new-is-admin" type="checkbox"> Também é admin
-    </label>
-    <button onclick="adminAddUser()"
-      style="padding:9px 20px; background:#16a34a; color:#fff; border:none;
-      border-radius:7px; font-size:14px; cursor:pointer; margin-right:8px;">
-      Adicionar
-    </button>
-    <button onclick="document.getElementById('admin-panel').style.display='none'"
-      style="padding:9px 20px; background:#374151; color:#fff; border:none;
-      border-radius:7px; font-size:14px; cursor:pointer;">
-      Fechar
-    </button>
-  </div>
-</div>
-
 <div id="LS">
   <div class="ls-ball">&#9917;</div>
   <div class="ls-title">ÁLBUM COPA<br>2026</div>
@@ -299,17 +157,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 </div>
 
 <header>
-  <!-- Botão logout (sempre visível após login) -->
-      <button onclick="AUTH.logout()" title="Sair"
-  style="background:transparent; border:1px solid #374151; color:#9ca3af;
-  border-radius:7px; padding:6px 12px; font-size:13px; cursor:pointer;">
-  Sair
-</button>
-
-<!-- Botão admin (só aparece para admins — controle pelo JS) -->
-<button id="btn-admin" onclick="openAdminPanel()" style="display:none;">
-  ⚙️ Admin
-</button>
   <div class="hbg"></div>
   <div class="hinner">
     <div class="copa-badge">WORLD CUP 2026</div>
@@ -454,78 +301,6 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 <canvas id="ecanvas"></canvas>
 
 <script>
-
-// ─── AUTH SYSTEM ─────────────────────────────────────────────
-var AUTH = {
-  currentUser: null,
-
-  async hash(str) {
-    // Hash djb2 — funciona em file:// e HTTPS
-    let h = 5381;
-    for (let i = 0; i < str.length; i++) {
-      h = ((h << 5) + h) ^ str.charCodeAt(i);
-      h = h >>> 0;
-    }
-    return 'h_' + h.toString(16).padStart(8, '0');
-  },
-
-  getUsers() {
-    return JSON.parse(localStorage.getItem('wc26_users') || '{}');
-  },
-
-  saveUsers(users) {
-    localStorage.setItem('wc26_users', JSON.stringify(users));
-  },
-
-  async init() {
-    const users = this.getUsers();
-    if (Object.keys(users).length === 0) {
-      const h = await this.hash('admin123');
-      users['admin'] = { hash: h, isAdmin: true };
-      this.saveUsers(users);
-    }
-    const sess = sessionStorage.getItem('wc26_session');
-    if (sess) {
-      this.currentUser = sess;
-      return true;
-    }
-    return false;
-  },
-
-  async login(username, password) {
-    const users = this.getUsers();
-    const user = users[username.toLowerCase()];
-    if (!user) return false;
-    const h = await this.hash(password);
-    if (h !== user.hash) return false;
-    this.currentUser = username.toLowerCase();
-    sessionStorage.setItem('wc26_session', this.currentUser);
-    return true;
-  },
-
-  logout() {
-    sessionStorage.removeItem('wc26_session');
-    this.currentUser = null;
-    location.reload();
-  },
-
-  isAdmin() {
-    const users = this.getUsers();
-    return users[this.currentUser]?.isAdmin === true;
-  }
-};
-
-// ─── WRAPPERS DE lsGet (namespace por usuário) ─────────
-function lsGet(key) {
-  return localStorage.getItem('wc26_' + AUTH.currentUser + '_' + key);
-}
-function lsSet(key, val) {
-  localStorage.setItem('wc26_' + AUTH.currentUser + '_' + key, val);
-}
-function lsDel(key) {
-  localStorage.removeItem('wc26_' + AUTH.currentUser + '_' + key);
-}
-
 var teams=[
   {id:"estadios", name:"Estádios", flag: "EST", emoji: "🏟️", group: "OUTRAS", labels:["MetLife Stadium", "AT&T Stadium", "SoFi Stadium", "Mercedes-Benz Stadium", "Hard Rock Stadium", "Lumen Field", "Gillette Stadium", "Lincoln Financial Stadium", "Levi's Stadium", "NGR Stadium", "Arrowhead Stadium"], count:11},
   {id:"especiais", name:"Especiais", flag:"SPE", emoji: "⚽", group: "OUTRAS", labels:["Panini", "FIFA", "Mascote 1", "Mascote 2", "Taça 1", "Taça 2", "Logo 1", "Logo 2", "Bola"], count:9},
@@ -590,25 +365,25 @@ var curAlbum = 'a1';
 var albums = [];
 function loadRep() {
   try {
-    var s = lsGet('wc26rep_' + curAlbum);
+    var s = localStorage.getItem('wc26rep_' + curAlbum);
     if (s) repeated = JSON.parse(s);
   } catch(e) {}
 }
 
 function saveRep() {
-  try { lsGet.setItem('wc26rep_' + curAlbum, JSON.stringify(repeated)); } catch(e) {}
+  try { localStorage.setItem('wc26rep_' + curAlbum, JSON.stringify(repeated)); } catch(e) {}
 }
 
 function load() {
   try {
-    var s = lsGet('wc26_' + curAlbum);
+    var s = localStorage.getItem('wc26_' + curAlbum);
     if (s) collected = JSON.parse(s);
   } catch(e) {}
   loadRep();
 }
 
 function save() {
-  try { lsGet.setItem('wc26_' + curAlbum, JSON.stringify(collected)); } catch(e) {}
+  try { localStorage.setItem('wc26_' + curAlbum, JSON.stringify(collected)); } catch(e) {}
 }
 
 function key(tid,n){return tid+"_"+n;}
@@ -782,7 +557,7 @@ function resetRep() {
   if (!confirm('Resetar TODAS as repetidas do álbum "' + name + '"?')) return;
   // Substitui o objeto repeated por um vazio
   repeated = {};
-  // Salva no lsGet
+  // Salva no localStorage
   saveRep();
   // Redesenha a aba repetidas
   renderRepeated();
@@ -883,18 +658,18 @@ function search(q){
 }
 function loadAlbums() {
   try {
-    var s = lsGet('albums');
+    var s = localStorage.getItem('wc26_albums');
     if (s) albums = JSON.parse(s);
     // migração: se não há álbuns mas há dados antigos, cria o Álbum 1 com eles
     if (!albums.length) {
       albums = [{id: 'a1', name: 'Álbum 1'}];
       saveAlbums();
-      var oldC = lsGet('wc26');
-      var oldR = lsGet('wc26rep');
-      if (oldC) lsGet.setItem('a1', oldC);
-      if (oldR) lsGet.setItem('a1', oldR);
+      var oldC = localStorage.getItem('wc26');
+      var oldR = localStorage.getItem('wc26rep');
+      if (oldC) localStorage.setItem('wc26_a1', oldC);
+      if (oldR) localStorage.setItem('wc26rep_a1', oldR);
     }
-    curAlbum = lsGet('wc26_cur') || albums[0].id;
+    curAlbum = localStorage.getItem('wc26_cur') || albums[0].id;
   } catch(e) {
     albums = [{id: 'a1', name: 'Álbum 1'}];
     curAlbum = 'a1';
@@ -902,12 +677,12 @@ function loadAlbums() {
 }
 
 function saveAlbums() {
-  try { lsGet.setItem('albums', JSON.stringify(albums)); } catch(e) {}
+  try { localStorage.setItem('wc26_albums', JSON.stringify(albums)); } catch(e) {}
 }
 
 function switchAlbum(id) {
   curAlbum = id;
-  try { lsGet.setItem('cur', id); } catch(e) {}
+  try { localStorage.setItem('wc26_cur', id); } catch(e) {}
   collected = {};
   repeated = {};
   load();
@@ -997,8 +772,8 @@ function deleteAlbumById(id) {
   albums = albums.filter(function(a) { return a.id !== id; });
   saveAlbums();
   try {
-    lsGet.removeItem('wc26_' + id);
-    lsGet.removeItem('wc26rep_' + id);
+    localStorage.removeItem('wc26_' + id);
+    localStorage.removeItem('wc26rep_' + id);
   } catch(e) {}
   if (wasActive) switchAlbum(albums[0].id);
   renderAlbumList();

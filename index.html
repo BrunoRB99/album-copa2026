@@ -989,13 +989,19 @@ function _hideLS(){
 }
 loadAlbums();
 load();
+render();
 renderAlbumSelector();
-prog(20);
-setTimeout(function(){
-  render();
-  prog(100);
-  setTimeout(hideLS, 500);
-}, 80);
+_prog(0);
+
+var progAtual = 0;
+var intervalo = setInterval(function(){
+  progAtual += 2;
+  _prog(progAtual);
+  if(progAtual >= 100){
+    clearInterval(intervalo);
+    setTimeout(_hideLS, 400);
+  }
+}, 10);
 
 
 

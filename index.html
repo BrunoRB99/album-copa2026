@@ -182,6 +182,18 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 .picker-card-team{font-size:9px;color:var(--muted);margin-top:4px;line-height:1.3;}
 .picker-card-code{font-size:9px;font-weight:700;color:var(--gold);margin-top:2px;}
 .picker-empty{text-align:center;padding:40px 20px;color:var(--muted);font-size:13px;}
+.picker-card-used {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.picker-card-used-lbl {
+  font-size: 8px;
+  color: #e74c3c;
+  font-weight: 700;
+  margin-top: 3px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 </style>
 </head>
 <body>
@@ -386,13 +398,13 @@ var teams=[
   {id:"southkorea",  name:"Coreia do Sul",      flag:"KOR",emoji:"&#127472;&#127479;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"mexico",      name:"México",             flag:"MEX",emoji:"&#127474;&#127485;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"southafrica", name:"África do Sul",      flag:"RSA",emoji:"&#127487;&#127462;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"czech",     name:"República Tcheca",     flag:"CZE",emoji:"&#127464;&#127487;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"czech",       name:"Rep. Tcheca",     flag:"CZE",emoji:"&#127464;&#127487;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"canada",      name:"Canadá",             flag:"CAN",emoji:"&#127464;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"qatar",       name:"Catar",              flag:"QAT",emoji:"&#127478;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"switzerland", name:"Suíça",              flag:"SUI",emoji:"&#127464;&#127469;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"bosnia",     name:"Bósnia e Herzegovina",flag:"BOS",emoji:"&#127463;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "Alisson", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;",         group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;", group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"haiti",       name:"Haiti",              flag:"HAI",emoji:"&#127469;&#127481;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"morocco",     name:"Marrocos",           flag:"MAR",emoji:"&#127474;&#127462;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"australia",   name:"Austrália",          flag:"AUS",emoji:"&#127462;&#127482;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -616,6 +628,12 @@ var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
 function setF(f) {
   curFilter = f;
+  // ↓ NOVO: zera a busca ao trocar de seção
+  searchQuery = '';
+  var sbx = document.getElementById('sbx');
+  if (sbx) sbx.value = '';
+  document.getElementById('foundBar').className = 'found-bar';
+  // ↑ fim da adição
   var sel = document.getElementById('filterSel');
   if (sel && sel.value !== f) sel.value = f;
   if (f === 'rep') renderRepeated();
@@ -1180,11 +1198,22 @@ function clearDreamTeam() {
 var dtPickerSlot = null, dtPickerPos = null;
 
 function openDtPicker(slotKey, posType) {
-  dtPickerSlot = slotKey; dtPickerPos = posType;
+  dtPickerSlot = slotKey;
+  dtPickerPos = posType;
   var validNs = DT_POS_STICKERS[posType];
   document.getElementById('dtPickerIco').textContent = DT_POS_ICONS[posType];
   document.getElementById('dtPickerTitle').textContent = 'Escolher ' + DT_POS_LABELS[posType];
-  document.getElementById('dtPickerSub').textContent = 'Figurinhas coletadas para esta posi\u00e7\u00e3o:';
+  document.getElementById('dtPickerSub').textContent = 'Selecione uma figurinha coletada para esta posição.';
+
+  // Coleta figurinhas já usadas em OUTROS slots (não o atual)
+  var usedCodes = {};
+  Object.keys(dreamTeam.slots).forEach(function(k) {
+    if (k !== slotKey && dreamTeam.slots[k]) {
+      var s = dreamTeam.slots[k];
+      usedCodes[getCode(s.tid, s.n)] = true;
+    }
+  });
+
   var cards = '', found = false;
   teams.forEach(function(t) {
     if (t.id === 'estadios' || t.id === 'especiais') return;
@@ -1192,16 +1221,27 @@ function openDtPicker(slotKey, posType) {
       if (got(t.id, n)) {
         found = true;
         var code = getCode(t.id, n);
-        var lbl = (t.labels && t.labels[n-1]) ? t.labels[n-1] : LABELS[n-1];
-        cards += '<div class="picker-card" onclick="selectDtSlot(\'' + t.id + '\',' + n + ')">';
-        cards += '<div class="picker-card-ico">' + t.emoji + '</div>';
-        cards += '<div class="picker-card-team">' + t.name + '</div>';
-        cards += '<div class="picker-card-code">' + code + ' \u00b7 ' + lbl + '</div>';
-        cards += '</div>';
+        var lbl = t.labels ? (t.labels[n-1] || LABELS[n-1]) : LABELS[n-1];
+        var isUsed = !!usedCodes[code];
+        if (isUsed) {
+          // Exibe bloqueada, sem onclick
+          cards += '<div class="picker-card picker-card-used">';
+          cards += '<div class="picker-card-ico">' + t.emoji + '</div>';
+          cards += '<div class="picker-card-team">' + t.name + '</div>';
+          cards += '<div class="picker-card-code">' + code + ' \u00b7 ' + lbl + '</div>';
+          cards += '<div class="picker-card-used-lbl">Em uso</div>';
+          cards += '</div>';
+        } else {
+          cards += '<div class="picker-card" onclick="selectDtSlot(\'' + t.id + '\',' + n + ')">';
+          cards += '<div class="picker-card-ico">' + t.emoji + '</div>';
+          cards += '<div class="picker-card-team">' + t.name + '</div>';
+          cards += '<div class="picker-card-code">' + code + ' \u00b7 ' + lbl + '</div>';
+          cards += '</div>';
+        }
       }
     });
   });
-  if (!found) cards = '<div class="picker-empty">Nenhuma figurinha coletada para esta posi\u00e7\u00e3o.</div>';
+  if (!found) cards = '<div class="picker-empty">Nenhuma figurinha coletada para esta posição.</div>';
   document.getElementById('dtPickerGrid').innerHTML = cards;
   document.getElementById('dtPickerModal').classList.add('show');
 }

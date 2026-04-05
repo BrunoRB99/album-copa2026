@@ -617,12 +617,21 @@ function updTeam(tid){
   if(ban) ban.className="cbanner"+(c===mx?" show":"");
   if(t) updGroup(t.group);
 }
-function togStk(tid,n){
-  var k=key(tid,n);collected[k]=!collected[k];save();
-  var el=document.getElementById("s_"+k);
-  if(el){var f=el.classList.contains("found");el.className="stk"+(collected[k]?" got":"")+(f?" found":"");}
-  updTeam(tid);updProgress();
-  toast((collected[k]?"+ "+getCode(tid,n)+" coletada!":"- "+getCode(tid,n)+" removida"),!collected[k]);
+function togStk(tid, n) {
+  var k = key(tid, n);
+  collected[k] = !collected[k];
+  save();
+  var el = document.getElementById('s_' + k);
+  if (el) {
+    var f = el.classList.contains('found');
+    el.className = 'stk' + (collected[k] ? ' got' : '') + (f ? ' found' : '');
+    // ↓ aplica ou remove o gradiente da bandeira
+    var grad = getFlagGradient(tid);
+    if (grad) el.style.background = collected[k] ? grad : '';
+    // ↑ fim da adição
+  }
+  updTeam(tid); updProgress();
+  toast((collected[k] ? '+ ' + getCode(tid,n) + ' coletada!' : '- ' + getCode(tid,n) + ' removida'), !collected[k]);
 }
 var tTimer;
 function toast(msg,bad){var t=document.getElementById("toast");t.textContent=msg;t.className="toast show"+(bad?" bad":"");clearTimeout(tTimer);tTimer=setTimeout(function(){t.className="toast";},2000);}
@@ -664,25 +673,27 @@ function resetRep() {
 }
 
 
-function lazyLoadGrid(tid){
-  var grid=document.getElementById("grid_"+tid);
-  if(!grid||grid.dataset.loaded==="1")return;
-  var t=teams.find(function(x){return x.id===tid;});
-  if(!t)return;
-  var h="";
+function lazyLoadGrid(tid) {
+  var grid = document.getElementById('grid_' + tid);
+  if (!grid || grid.dataset.loaded === '1') return;
+  var t = teams.find(function(x){ return x.id === tid; });
+  if (!t) return;
+  var h = '';
   var lbls = t.labels || LABELS;
-  var icos = t.icons  || ICONS;
-  var max=tMax(tid);
-  for(var n=1;n<=max;n++){
-    var col=got(tid,n),code=getCode(tid,n);
-    var label=(lbls[n-1]||"").toLowerCase();
-    var isF=searchQuery&&(code.toLowerCase()===searchQuery||code.toLowerCase().indexOf(searchQuery)===0||label.indexOf(searchQuery)>=0);
-    h+='<div class="stk'+(col?" got":"")+(isF?" found":"")+'" id="s_'+key(tid,n)+'" onclick="togStk(\''+ tid +'\','+n+')">';
-    h+='<button class="stk-rep-btn" onclick="openRepSingleModal(\''+code+'\',event)">Repetida</button>';
-  h+='<span class="schk">&#10003;</span><span class="snum">'+code+'</span><span class="slbl">'+lbls[n-1]+'</span></div>';
+  var max = tMax(tid);
+  var grad = getFlagGradient(tid); // ← calcula uma vez por time
+  for (var n = 1; n <= max; n++) {
+    var col = got(tid, n), code = getCode(tid, n);
+    var label = lbls[n-1].toLowerCase();
+    var isF = searchQuery && (code.toLowerCase() === searchQuery || code.toLowerCase().indexOf(searchQuery) >= 0 || label.indexOf(searchQuery) >= 0);
+    // ↓ aplica gradiente da bandeira se coletada
+    var gradAttr = (col && grad) ? ' style="background:' + grad + '"' : '';
+    h += '<div class="stk' + (col ? ' got' : '') + (isF ? ' found' : '') + '"' + gradAttr + ' id="s_' + key(tid,n) + '" onclick="togStk(\'' + tid + '\',' + n + ')">';
+    h += '<button class="stk-rep-btn" onclick="openRepSingleModal(\'' + code + '\',event)">Repetida</button>';
+    h += '<span class="schk">✓</span><span class="snum">' + code + '</span><span class="slbl">' + lbls[n-1] + '</span></div>';
   }
-  grid.innerHTML=h;
-  grid.dataset.loaded="1";
+  grid.innerHTML = h;
+  grid.dataset.loaded = '1';
 }
 
 function toggleTeam(tid){
@@ -1089,7 +1100,75 @@ var DT_POS_ICONS = {GK:'🥅', DEF:'🛡️', VOL:'💪', MEI:'🎯', ATA:'⚽'}
 // Indices n (1-based) de cada tipo de posição no array LABELS
 // LABELS = ["Escudo","Foto Time","Goleiro","Zagueiro","Zagueiro","Lateral D","Lateral E","Vol.","Vol.","Meia","Meia","Atacante","Atacante",...]
 var DT_POS_STICKERS = {GK:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], DEF:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], VOL:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], MEI:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ATA:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]};
+// ===== CORES DAS BANDEIRAS =====
+var FLAG_COLORS = {
+  estadios:    ['#ffcc00'],
+  especiais:   ['#ffcc00'],
+  southkorea:  ['#EC0F32','#021858','#FFFFFF'],
+  mexico:      ['#F5313E','#00933B','#FFFFFF'],
+  southafrica: ['#19AE47','#FFDC02','#19AE47'],
+  czech:       ['#11457E','#D7141A','#11457E'],
+  canada:      ['#FFFFFF','#D80621','#FFFFFF'],
+  qatar:       ['#FFFFFF','#8A1538','#FFFFFF'],
+  switzerland: ['#FFFFFF','#FF0000','#FFFFFF'],
+  bosnia:      ['#FFCD00','#002F6C','#FFFFFF'],
+  brazil:      ['#19AE47','#FFDC02','#193375'],
+  scotland:    ['#FFFFFF','#005EB8','#FFFFFF'],
+  haiti:       ['#D21034','#00209F','#D21034'],
+  morocco:     ['#17A376','#E50011','#17A376'],
+  australia:   ['#00843D','#FFCD00','#00843D'],
+  usa:         ['#B31942','#FFFFFF','#0A3161'],
+  turkey:      ['#FFFFFF','#C8102E','#FFFFFF'],
+  paraguay:    ['#D52B1E','#FFFFFF','#0038A8'],
+  germany:     ['#000000','#FFFFFF','#DD000'],
+  ivorycoast:  ['#009A44','#F77F00','#009A44'],
+  curacao:     ['#F9E11E','#003DA5','#F9E11E'],
+  ecuador:     ['#002255','#FFCE00','#002255'],
+  netherlands: ['#FFFFFF','#F36C21','#FFFFFF'],
+  japan:       ['#FFFFFF','#000555','#E30016'],
+  tunisia:     ['#FFFFFF','#E50011','#FFFFFF'],
+  sweden:      ['#006AA7','#FECC02','#006AA7'],
+  belgium:     ['#FFD500','#E30613','#000000'],
+  egypt:       ['#000000','#C8102E','#FFFFFF'],
+  iran:        ['#239F40','#FFFFFF','#DA0000'],
+  newzealand:  ['#00247D','#FFFFFF','#CC142B'],
+  saudiarabia: ['#FFFFFF','#006C35','#FFFFFF'],
+  capeverde:   ['#CF2027','#003893','#CF2027'],
+  spain:       ['#021250','#AA151B','#F1BF00'],
+  uruguay:     ['#FFFFFF','#55B5E5','#FFFFFF'],
+  france:      ['#002395','#ED2939'],
+  norway:      ['#EF2B2D','#002868'],
+  senegal:     ['#00853F','#FDEF42','#E31B23'],
+  intercont2:  ['#007A3D','#CE1126'],
+  argentina:   ['#74ACDF','#FFFFFF'],
+  argelia:     ['#006233','#D21034'],
+  jordan:      ['#007A3D','#CE1126'],
+  austria:     ['#ED2939','#FFFFFF'],
+  colombia:    ['#FCD116','#003087','#CE1126'],
+  portugal:    ['#006600','#FF0000'],
+  uzbekistan:  ['#1EB53A','#009FCA'],
+  intercont1:  ['#007FFF','#F7D618','#CE1126'],
+  croatia:     ['#FF0000','#003DA5'],
+  ghana:       ['#006B3F','#FCD116','#EF3340'],
+  england:     ['#CF142B','#FFFFFF'],
+  panama:      ['#DA121A','#1C3F94'],
+};
 
+function darkenHex(hex, f) {
+  var r = Math.round(parseInt(hex.slice(1,3),16) * f);
+  var g = Math.round(parseInt(hex.slice(3,5),16) * f);
+  var b = Math.round(parseInt(hex.slice(5,7),16) * f);
+  return 'rgb('+r+','+g+','+b+')';
+}
+
+function getFlagGradient(tid) {
+  var cols = FLAG_COLORS[tid];
+  if (!cols || !cols.length) return null;
+  var d = cols.map(function(c){ return darkenHex(c, 0.4); });
+  if (d.length === 1) return 'linear-gradient(145deg,'+d[0]+','+d[0]+')';
+  if (d.length === 2) return 'linear-gradient(145deg,'+d[0]+','+d[1]+')';
+  return 'linear-gradient(145deg,'+d[0]+' 0%,'+d[1]+' 50%,'+d[2]+' 100%)';
+}
 var dreamTeam = {formation:'442', slots:{}};
 
 function loadDT() {

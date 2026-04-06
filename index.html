@@ -96,7 +96,7 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 .stk{aspect-ratio:3/4;min-height:85px;border-radius:9px;background:linear-gradient(145deg,#1a2a3d,#0f1c2e);border:1.5px solid rgba(255,255,255,.07);display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:20px;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
 .stk::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 50%);}
 .stk:hover{transform:translateY(-3px) scale(1.05);border-color:rgba(240,180,41,.5);box-shadow:0 8px 20px rgba(0,0,0,.4);}
-.stk.got{background:linear-gradient(145deg,#0d3322,#1a5c38);border-color:rgba(29,185,84,.5);box-shadow:0 2px 14px rgba(29,185,84,.2);}
+.stk.got{background:linear-gradient(145deg,#0d3322,#1a5c38);border-color: rgba(29,185,84,.5);box-shadow: 0 2px 14px rgba(29,185,84,.2);}
 .stk.got:hover{border-color:var(--green);}
 .stk.found{border-color:var(--gold)!important;box-shadow:0 0 0 2px var(--gold),0 0 20px rgba(240,180,41,.5)!important;animation:pgold 1.5s ease-in-out 3;}
 @keyframes pgold{0%,100%{box-shadow:0 0 0 2px var(--gold),0 0 20px rgba(240,180,41,.4);}50%{box-shadow:0 0 0 4px var(--gold),0 0 40px rgba(240,180,41,.8);}}
@@ -508,11 +508,15 @@ function repTeamHTML(t,stickers){
     '</div></div><div class="thr"><div class="tcnt grp-'+t.group.replace('GRUPO ','').replace('OUTRAS','star')+'">'+t.group.replace('GRUPO ','').replace('OUTRAS','\u2605')+'</div></div></div>'+
     '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:7px;padding:14px 16px 16px;border-top:1px solid var(--border)">';
       stickers.sort(function(a,b){return a.n-b.n;});
+      
+  // ↓ adicionar estas 2 linhas antes do forEach
+var grad = getFlagGradient(t.id);
+var gSt = grad ? ';background:' + grad : '';
 
-  stickers.forEach(function(s){
+stickers.forEach(function(s){
     var lbls=t.labels||LABELS;
     var lbl=lbls[s.n-1]||'';
-    h+='<div class="stk got" style="position:relative;cursor:pointer" onclick="removeRep(\''+s.code+'\')">'+
+    h+='<div class="stk got" style="position:relative;cursor:pointer'+gSt+'" onclick="removeRep(\''+s.code+'\')">'+
   '<span class="snum">'+s.code+'</span>'+
   '<span class="slbl">'+lbl+'</span>'+
   '<span style="position:absolute;bottom:4px;right:5px;font-size:9px;color:var(--gold);font-weight:700">x'+s.qty+'</span>'+
@@ -1136,22 +1140,22 @@ var FLAG_COLORS = {
   capeverde:   ['#CF2027','#003893','#CF2027'],
   spain:       ['#021250','#AA151B','#F1BF00'],
   uruguay:     ['#FFFFFF','#55B5E5','#FFFFFF'],
-  france:      ['#002395','#ED2939'],
-  norway:      ['#EF2B2D','#002868'],
+  france:      ['#FFFFFF','#002395','#ED2939'],
+  norway:      ['#FFFFFF','#EF2B2D','#002868'],
   senegal:     ['#00853F','#FDEF42','#E31B23'],
-  intercont2:  ['#007A3D','#CE1126'],
-  argentina:   ['#74ACDF','#FFFFFF'],
-  argelia:     ['#006233','#D21034'],
-  jordan:      ['#007A3D','#CE1126'],
-  austria:     ['#ED2939','#FFFFFF'],
-  colombia:    ['#FCD116','#003087','#CE1126'],
-  portugal:    ['#006600','#FF0000'],
-  uzbekistan:  ['#1EB53A','#009FCA'],
-  intercont1:  ['#007FFF','#F7D618','#CE1126'],
-  croatia:     ['#FF0000','#003DA5'],
+  intercont2:  ['#007A3D','#FFFFFF','#CE1126'],
+  argentina:   ['#FFFFFF','#43A1D5','#FFFFFF'],
+  argelia:     ['#006233','#FFFFFF','#006233'],
+  jordan:      ['#CE1126','#FFFFFF','#CE1126'],
+  austria:     ['#000000','#EF3340','#000000'],
+  colombia:    ['#003087','#FCD116','#CE1126'],
+  portugal:    ['#006600','#FF0000','#FFFFFF'],
+  uzbekistan:  ['#FFFFFF','#0072CE','#FFFFFF'],
+  intercont1:  ['#FFFFFF','#0085CA','#CE1126'],
+  croatia:     ['#FF0000','#FFFFFF','#003DA5'],
   ghana:       ['#006B3F','#FCD116','#EF3340'],
-  england:     ['#CF142B','#FFFFFF'],
-  panama:      ['#DA121A','#1C3F94'],
+  england:     ['#CF142B','#FFFFFF','#CF142B'],
+  panama:      ['#1C3F94','#DA121A','#FFFFFF'],
 };
 
 function darkenHex(hex, f) {
@@ -1172,8 +1176,9 @@ function getFlagGradient(tid) {
 var dreamTeam = {formation:'442', slots:{}};
 
 function loadDT() {
+  dreamTeam = {formation:'442', slots:{}};          // ← linha adicionada AQUI, fora do try
   try {
-    var s = localStorage.getItem('wc26dt_' + curAlbum);
+    var s = localStorage.getItem('wc26dt_' + curAlbum);   // ← underscore mantido
     if (s) dreamTeam = JSON.parse(s);
     if (!dreamTeam.slots) dreamTeam.slots = {};
     if (!DT_FORMATIONS[dreamTeam.formation]) dreamTeam.formation = '442';
@@ -1211,7 +1216,7 @@ function renderDreamTeam() {
       rowH += '<div class="dt-slot-pos">' + DT_POS_LABELS[row.pos] + '</div>';
       if (isF && team) {
         rowH += '<div class="dt-slot-ico">' + team.emoji + '</div>';
-        rowH += '<div class="dt-slot-lbl">' + team.name + '</div>';
+        rowH += '<div class="dt-slot-lbl">' + code + '</div>';
         rowH += '<div class="dt-slot-code">' + (team.labels[sel.n-1] || LABELS[sel.n-1]) + '</div>';
         rowH += '<span class="dt-slot-x" onclick="clearDtSlot(event,\'' + slotKey + '\')">\u2715</span>';
       } else {

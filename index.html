@@ -393,20 +393,20 @@ main{max-width:1100px;margin:0 auto;padding:16px;}
 
 <script>
 var teams=[
-  {id:"estadios", name:"Estádios", flag: "EST", emoji: "🏟️", group: "OUTRAS", labels:["MetLife Stadium", "AT&T Stadium", "SoFi Stadium", "Mercedes-Benz Stadium", "Hard Rock Stadium", "Lumen Field", "Gillette Stadium", "Lincoln Financial Stadium", "Levi's Stadium", "NGR Stadium", "Arrowhead Stadium"], count:11},
-  {id:"especiais", name:"Especiais", flag:"SPE", emoji: "⚽", group: "OUTRAS", labels:["Panini", "FIFA", "Mascote 1", "Mascote 2", "Taça 1", "Taça 2", "Logo 1", "Logo 2", "Bola"], count:9},
-  {id:"southkorea",  name:"Coreia do Sul",      flag:"KOR",emoji:"&#127472;&#127479;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"mexico",      name:"México",             flag:"MEX",emoji:"&#127474;&#127485;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"southafrica", name:"África do Sul",      flag:"RSA",emoji:"&#127487;&#127462;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"czech",       name:"Rep. Tcheca",     flag:"CZE",emoji:"&#127464;&#127487;",group:"GRUPO A", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"canada",      name:"Canadá",             flag:"CAN",emoji:"&#127464;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"qatar",       name:"Catar",              flag:"QAT",emoji:"&#127478;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"switzerland", name:"Suíça",              flag:"SUI",emoji:"&#127464;&#127469;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"bosnia",     name:"Bósnia e Herzegovina",flag:"BOS",emoji:"&#127463;&#127462;",group:"GRUPO B", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;", group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"haiti",       name:"Haiti",              flag:"HAI",emoji:"&#127469;&#127481;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
-  {id:"morocco",     name:"Marrocos",           flag:"MAR",emoji:"&#127474;&#127462;",group:"GRUPO C", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
+  {id:"especiais", name:"Especiais", flag:"FWC", emoji: "⚽", group: "OUTRAS", codes:["00","FWC-1","FWC-2","FWC-3","FWC-4","FWC-5","FWC-6","FWC-7","FWC-8","FWC-9","FWC-10","FWC-11","FWC-12","FWC-13","FWC-14","FWC-15","FWC-16","FWC-17","FWC-18","FWC-19","FWC-20"], labels:["Panini", "Emblema 1/2", "Emblema 2/2", "Mascotes", "Slogan", "Bola", "País Sede - Canadá", "País Sede - México", "País Sede - USA", "9", "10", "11", "12", "13", "Argentina 1986", "Brasil 1994", "Brasil 2002", "Itália 2006", "Alemanha 2014", "Argentina 2022"], count:20},
+  {id:"coca", name:"Coca-Cola", flag:"CC", emoji: "🥤", group: "OUTRAS", labels:["Lamine Yamal", "Joshua Kimmich", "Harry Kane", "Santiago Gimenez", "Joško Gvardiol", "Federico Valverde", "Jefferson Lerma", "Enner Valencia", "Gabriel Magalhães", "Virgil van Dijk", "Alphonso Davies", "Emiliano Martinez", "Raúl Jiménez", "Lautaro Martínez"], count:14},
+  {id:"mexico",      name:"México",             flag:"MEX",emoji:"&#127474;&#127485;",group:"GRUPO A", labels:["Escudo México", "Luis Malagón", "Johan Vásquez", "Jorge Sánchez", "César Montes", "Jesús Gallardo", "Israel Reyes", "Diego Lainez", "Carlos Rodríguez", "Edson Álvarez", "Orbelín Pineda", "Marcel Ruiz", "Equipe México", "Erick Sánchez", "Hirving Lozano", "Santiago Giménez", "Raúl Jiménez", "Alexis Vega", "Roberto Alvarado", "César Huerta"]},
+  {id:"southafrica", name:"África do Sul",      flag:"RSA",emoji:"&#127487;&#127462;",group:"GRUPO A", labels:["Escudo África do Sul", "Ronwen Williams", "Sipho Chaine", "Aubrey Modiba", "Samukele Kabini", "Mbekezeli Mbokazi", "Khulumani Ndamane", "Siyabonga Ngezana", "Khuliso Mudau", "Nkosinathi Sibisi", "Teboho Mokoena", "Thalente Mbatha", "Equipe África do SUl", "Bathusi Aubaas", "Yaya Sithole", "Sipho Mbule", "Lyle Foster", "Iqraam Rayners", "Mohau Nkota", "Oswin Appollis"]},
+  {id:"southkorea",  name:"Coreia do Sul",      flag:"KOR",emoji:"&#127472;&#127479;",group:"GRUPO A", labels:["Escudo Coreia do Sul", "Hyeonwoo Jo", "Seunggyu Kim", "Minjae Kim", "Yumin Cho", "Youngwoo Seol", "Hanbeom Lee", "Taeseok Lee", "Myungjae Lee", "Jaesung Lee", "Inbeom Hwang", "Kangin Lee", "Equipe Coreia do Sul", "Seungho Paik", "Jens Castrop", "Donggyeong Lee", "Guesung Cho", "Heungmin Son", "Heechan Hwang", "Hyeongyu Oh"]},
+  {id:"czech",       name:"República Tcheca",     flag:"CZE",emoji:"&#127464;&#127487;",group:"GRUPO A", labels:["Escudo República Tcheca", "Matěj Kovář", "Jindřich Staněk", "Ladislav Krejčí", "Vladimír Coufal", "Jaroslav Zelený", "Tomáš Holeš", "David Zima", "Michal Sadílek", "Lukáš Provod", "Lukáš Červ", "Tomáš Souček", "Equipe República Tcheca", "Pavel Šulc", "Matěj Vydra", "Vasil Kusej", "Tomáš Chorý", "Václav Černý", "Adam Hložek", "Patrik Schick"]},
+  {id:"canada",      name:"Canadá",             flag:"CAN",emoji:"&#127464;&#127462;",group:"GRUPO B", labels:["Escudo Canadá", "Dayne St. Clair", "Alphonso Davies", "Alistair Johnston", "Samuel Adekugbe", "Richie Laryea", "Derek Cornelius", "Moïse Bombito", "Kamal Miller", "Stephen Eustáquio", "Ismaël Koné", "Jonathan Osorio", "Equipe Canadá", "Jacob Shaffelburg", "Mathieu Choinière", "Niko Sigur", "Tajon Buchanan", "Liam Millar", "Cyle Larin", "Jonathan David"]},
+  {id:"bosnia",     name:"Bósnia e Herzegovina",flag:"BOS",emoji:"&#127463;&#127462;",group:"GRUPO B", labels:["Escudo Bósnia e Herzegovina", "Nikola Vasilj", "Amar Dedić", "Sead Kolašinac", "Tarik Muharemović", "Nihad Mujakić", "Nikola Katić", "Amir Hadžiahmetović", "Benjamin Tahirović", "Armin Gigović", "Ivan Šunjić", "Ivan Bašić", "Equipe Bósnia e Herzegovina", "Dženis Burnić", "Esmir Bajraktarević", "Amar Memić", "Ermedin Demirović", "Edin Džeko", "Samed Baždar", "Haris Tabaković"]},
+  {id:"qatar",       name:"Catar",              flag:"QAT",emoji:"&#127478;&#127462;",group:"GRUPO B", labels:["Escudo Catar", "Meshaal Barsham", "Sultan Albrake", "Lucas Mendes", "Homam Ahmed", "Boualem Khoukhi", "Pedro Miguel", "Tarek Salman", "Mohammed Mannai", "Karim Boudiaf", "Assim Madibo", "Hamed Fatehi", "Equipe Catar", "Mohammed Waad", "Abdulaziz Hatem", "Hassan Al-Haydos", "Edmílson Junior", "Akram Hassan Afif", "Ahmed Al-Ganehi", "Almoez Ali"]},
+  {id:"switzerland", name:"Suíça",              flag:"SUI",emoji:"&#127464;&#127469;",group:"GRUPO B", labels:["Escudo Suíça", "Gregor Kobel", "Yvon Mvogo", "Manuel Akanji", "Ricardo Rodríguez", "Nico Elvedi", "Aurèle Amenda", "Silvan Widmer", "Granit Xhaka", "Denis Zakaria", "Remo Freuler", "Fabian Rieder", "Equipe Suíça", "Ardon Jashari", "Johan Manzambi", "Michel Aebischer", "Breel Embolo", "Rubén Vargas", "Dan Ndoye", "Zeki Amdouni"]},
+  {id:"brazil",      name:"Brasil",             flag:"BRA",emoji:"&#127463;&#127479;",group:"GRUPO C", labels:["Escudo Brasil", "Alisson", "Bento", "Marquinhos", "Éder Militão", "Gabriel Magalhães", "Danilo", "Wesley", "Lucas Paquetá", "Casemiro", "Bruno Guimarães", "Luiz Henrique", "Equipe Brasil", "Vinícius Júnior", "Rodrygo", "João Pedro", "Matheus Cunha", "Gabriel Martinelli", "Raphinha", "Estêvão"]},
+  {id:"morocco",     name:"Marrocos",           flag:"MAR",emoji:"&#127474;&#127462;",group:"GRUPO C", labels:["Escudo Marrocos", "Yassine Bounou", "Munir El Kajoui", "Achraf Hakimi", "Noussair Mazraoui", "Nayef Aguerd", "Romain Saïss", "Jawad El Yamiq", "Adam Masina", "Sofyan Amrabat", "Azzedine Ounahi", "Eliesse Ben Seghir", "Equipe Marrocos", "Bilal El Khannouss", "Ismael Saibari", "Youssef En-Nesyri", "Abde Ezzalzouli", "Soufiane Rahimi", "Brahim Díaz", "Ayoub El Kaabi"]},
+  {id:"haiti",       name:"Haiti",              flag:"HAI",emoji:"&#127469;&#127481;",group:"GRUPO C", labels:["Escudo Haiti", "Johny Placide", "Carlens Arcus", "Martin Expérience", "Jean-Kévin Duverne", "Ricardo Adé", "Duke Lacroix", "Garven Metusala", "Hannes Delcroix", "Leverton Pierre", "Danley Jean Jacques", "Jean-Ricner Bellegarde", "Equipe Haiti", "Christopher Attys", "Derrick Etienne Jr.", "Josué Casimir", "Ruben Providence", "Duckens Nazon", "Louicius Deedson", "Frantzdy Pierrot"]},
+  {id:"scotland",    name:"Escócia",            flag:"SCO",emoji:"&#127988;&#917607;&#917602;&#917619;&#917603;&#917620;&#917631;", group:"GRUPO C", labels:["Escudo Escócia", "Angus Gunn", "Jack Hendry", "Kieran Tierney", "Aaron Hickey", "Andrew Robertson", "Scott McKenna", "John Souttar", "Anthony Ralston", "Grant Hanley", "Scott McTominay", "Billy Gilmour", "Equipe Escócia", "Lewis Ferguson", "Ryan Christie", "Kenny McLean", "John McGinn", "Lyndon Dykes", "Ché Adams", "Ben Gannon-Doak"]},
   {id:"australia",   name:"Austrália",          flag:"AUS",emoji:"&#127462;&#127482;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"usa",         name:"Estados Unidos",     flag:"USA",emoji:"&#127482;&#127480;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
   {id:"turkey",     name:"Turquia",            flag:"TUR",emoji:"&#127481;&#127479;",group:"GRUPO D", labels:["JOGADOR1", "JOGADOR2", "JOGADOR3", "JOGADOR4", "JOGADOR5", "JOGADOR6", "JOGADOR7", "JOGADOR8", "JOGADOR9", "JOGADOR10", "JOGADOR11", "JOGADOR12", "JOGADOR13", "JOGADOR14", "JOGADOR15", "JOGADOR16", "JOGADOR17", "JOGADOR18", "JOGADOR19", "JOGADOR20"]},
@@ -449,7 +449,7 @@ var LABELS=["Escudo","Foto Time","Goleiro","Zagueiro","Zagueiro","Lateral D","La
 var ICONS=["&#128737;","&#128247;","&#129354;","&#128737;","&#128737;","&#128640;","&#128640;","&#128170;","&#128170;","&#127919;","&#127919;","&#9889;","&#9889;","&#11088;","&#11088;","&#11088;","&#127775;","&#128081;","&#127942;","&#127807;"];
 var GCOLORS={"GRUPO A":"#e74c3c","GRUPO B":"#e67e22","GRUPO C":"#27ae60","GRUPO D":"#1abc9c","GRUPO E":"#3498db","GRUPO F":"#9b59b6","GRUPO G":"#e91e8c","GRUPO H":"#f39c12","GRUPO I":"#00bcd4","GRUPO J":"#ff5722","GRUPO K":"#8bc34a","GRUPO L":"#607d8b"};
 
-function getCode(tid,n){var t=teams.find(function(x){return x.id===tid;});if(t&&t.startNum!==undefined)return "#"+("000"+(t.startNum+n-1)).slice(-3);return (t?t.flag:tid.slice(0,3).toUpperCase())+"-"+("00"+n).slice(-3);}
+function getCode(tid,n){var t=teams.find(function(x){return x.id===tid;});if(t && t.codes && t.codes[n-1]) return t.codes[n-1];if(t&&t.startNum!==undefined)return "#"+String(t.startNum+n-1);return (t?t.flag:tid.slice(0,3).toUpperCase())+"-"+String(n);}
 var collected={},curFilter="all",expanded=false,searchQuery="";
 var repeated={};
 var curAlbum = 'a1';
@@ -544,10 +544,10 @@ function renderRepeated(){
     if(searchQuery){
       var _t=found.team;
       var _lbl=(_t.labels||LABELS)[found.n-1]||'';
-      var _match=code.toLowerCase().indexOf(searchQuery)>=0||
-        _t.name.toLowerCase().indexOf(searchQuery)>=0||
-        _t.group.toLowerCase().indexOf(searchQuery)>=0||
-        _lbl.toLowerCase().indexOf(searchQuery)>=0;
+      var _match=code.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0||
+        _t.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0||
+        _t.group.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0||
+        _lbl.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0;
       if(!_match)continue;
     }
     var tid=found.team.id;
@@ -689,7 +689,7 @@ function lazyLoadGrid(tid) {
   for (var n = 1; n <= max; n++) {
     var col = got(tid, n), code = getCode(tid, n);
     var label = lbls[n-1].toLowerCase();
-    var isF = searchQuery && (code.toLowerCase() === searchQuery || code.toLowerCase().indexOf(searchQuery) >= 0 || label.indexOf(searchQuery) >= 0);
+    var isF = searchQuery && (code.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")===nrm(searchQuery) || code.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery)) >= 0 || nrm(label).indexOf(nrm(searchQuery)) >= 0);
     // ↓ aplica gradiente da bandeira se coletada
     var gradAttr = (col && grad) ? ' style="background:' + grad + '"' : '';
     h += '<div class="stk' + (col ? ' got' : '') + (isF ? ' found' : '') + '"' + gradAttr + ' id="s_' + key(tid,n) + '" onclick="togStk(\'' + tid + '\',' + n + ')">';
@@ -723,7 +723,7 @@ function getStickerMatches(t){
   for(var n=1;n<=20;n++){
     var code=getCode(t.id,n).toLowerCase();
     var label=(lbls[n-1]||"").toLowerCase();
-    if(code===searchQuery||code.indexOf(searchQuery)===0||label.indexOf(searchQuery)>=0)matches.push(n);
+    if(nrm(code)===nrm(searchQuery)||nrm(code).indexOf(nrm(searchQuery))===0||nrm(label).indexOf(nrm(searchQuery))>=0)matches.push(n);
   }
   return matches;
 }
@@ -733,14 +733,15 @@ function teamPassesFilter(t){
   if(curFilter==="missing"&&cc===mx)return false;
   if(curFilter==="complete"&&cc!==mx)return false;
   if(!searchQuery)return true;
-  if(t.name.toLowerCase().indexOf(searchQuery)>=0)return true;
-  if(t.group.toLowerCase().indexOf(searchQuery)>=0)return true;
+  if(t.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0)return true;
+  if(t.group.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").indexOf(nrm(searchQuery))>=0)return true;
   if(t.tbd)return false;
   return getStickerMatches(t).length>0;
 }
+function nrm(s){return(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 
 function search(q){
-  searchQuery=q.trim().toLowerCase();
+  searchQuery=nrm(q.trim());
   render();
   var bar=document.getElementById("foundBar");
   if(!searchQuery){bar.className="found-bar";return;}
@@ -1106,7 +1107,7 @@ var DT_POS_ICONS = {GK:'🥅', DEF:'🛡️', VOL:'💪', MEI:'🎯', ATA:'⚽'}
 var DT_POS_STICKERS = {GK:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], DEF:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], VOL:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], MEI:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], ATA:[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]};
 // ===== CORES DAS BANDEIRAS =====
 var FLAG_COLORS = {
-  estadios:    ['#ffcc00'],
+  coca:    ['#ffcc00'],
   especiais:   ['#ffcc00'],
   southkorea:  ['#EC0F32','#021858','#FFFFFF'],
   mexico:      ['#F5313E','#00933B','#FFFFFF'],
